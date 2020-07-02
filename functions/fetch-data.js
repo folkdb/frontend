@@ -1,8 +1,8 @@
-const { get } = require('httpie');
+import { get } from 'httpie';
 
 const API_ENDPOINT = 'https://raw.githubusercontent.com/folkdb/seed/master/songs/sumer-is-icumen.toml';
 
-exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   let res;
 
   try {
@@ -22,4 +22,4 @@ exports.handler = async (event, context) => {
       data: res.data,
     }),
   }
-}
+};
