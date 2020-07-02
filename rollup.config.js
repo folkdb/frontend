@@ -9,8 +9,13 @@ export default [
       { file: 'lambda/fetch-data.js', format: 'cjs' },
     ],
     plugins: [
-      nodeResolve(),
+      nodeResolve({ preferBuiltins: true }),
       commonjs(),
     ],
+    external: [
+      'http',
+      'https',
+      'url',
+    ]
   },
 ];
