@@ -6,11 +6,11 @@ const API_ENDPOINT = 'https://raw.githubusercontent.com/folkdb/seed/master/songs
 
 
 export const handler = async (event, context) => {
-  let data;
+  let obj;
 
   try {
-    const res = await get(API_ENDPOINT);
-    data = await parseToml(res);
+    const { data } = await get(API_ENDPOINT);
+    obj = await parseToml(res);
   } catch (err) {
     return {
       statusCode: err.statusCode || 500,
@@ -20,6 +20,6 @@ export const handler = async (event, context) => {
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ data }),
+    body: JSON.stringify({ data: obj }),
   };
 };
