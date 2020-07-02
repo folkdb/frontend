@@ -1,5 +1,5 @@
 import { get } from 'httpie';
-import parseString from '@iarna/toml/parse-string.js';
+import parseToml from '@iarna/toml/parse-async.js';
 
 
 const API_ENDPOINT = 'https://raw.githubusercontent.com/folkdb/seed/master/songs/sumer-is-icumen.toml';
@@ -10,7 +10,7 @@ export const handler = async (event, context) => {
 
   try {
     const res = await get(API_ENDPOINT);
-    data = parseString(res);
+    data = await parseToml(res);
   } catch (err) {
     return {
       statusCode: err.statusCode || 500,
