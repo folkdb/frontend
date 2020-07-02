@@ -13,7 +13,7 @@
     "build": "del dist/* && svelte-render",
     "build:dev": "del dist/* && svelte-render --development",
     "merge:next": "git checkout master && git pull && git merge next -s recursive -Xtheirs",
-    "serve": "sirv start dist --port=8080",
+    "serve": "sirv dist -s --port=8080",
     "sync": "git pull && git add . && git commit -m 'automated sync' && git push",
     "test": "npm run build",
     "update": "updtr"
@@ -38,7 +38,7 @@
     "del-cli": "^3.0.0",
     "postcss": "^7.0.32",
     "pug": "^3.0.0",
-    "sirv-cli": "^0.4.6",
+    "sirv-cli": "^1.0.3",
     "svelte": "^3.23.0",
     "updtr": "^3.1.0"
   },
