@@ -1,7 +1,5 @@
 <script>
   import './styles/index.js';
-  import Header from './parts/Header.svelte';
-  import Nav from './parts/Nav.svelte';
   import Main from './parts/Main.svelte';
   import Footer from './parts/Footer.svelte';
 
