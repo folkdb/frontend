@@ -10,7 +10,7 @@ export const handler = async (event, context) => {
 
   try {
     const { data } = await get(API_ENDPOINT);
-    obj = await parseToml(res);
+    obj = await parseToml(data);
   } catch (err) {
     return {
       statusCode: err.statusCode || 500,
