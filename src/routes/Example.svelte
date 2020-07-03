@@ -48,7 +48,7 @@
         
           ul
             +each('song.recordings as r')
-            li {formatRecording(r)}
+              li {formatRecording(r)}
     
       +if('song.arrangements')
         section
