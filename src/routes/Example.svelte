@@ -15,16 +15,27 @@
 </script>
 
 <template lang="pug">
-  +if('song.error')
-    .error {song.error}
+  +if('song.data')
+    .typeset
+      h1 {song.data.canonicalName}
 
-  +elseif('song.data')
-    h1 {song.data.canonicalName}
-
-    h2 Transcriptions
+      section
+        h2 Transcriptions
     
-    h2 Recordings
+      section
+        h2 Recordings
     
-    h2 Arrangements
+      section
+        h2 Arrangements
+    
+    +elseif('song.error')
+      code.error {song.error}
 
 </template>
+
+<style lang='postcss'>
+  .error
+    @apply text-medium-red
+
+</style>
+    
