@@ -22,21 +22,17 @@
 
   #app
     @apply bg-near-white
-    @apply text-darker font-barlow font-regular text-sm
+    @apply text-darker font-sans font-regular text-sm
   
   #sidebar
     @apply w-full
-    @apply border-darker-blue
-    @apply bg-darker-blue
+    @apply border-medium-dark-blue
+    @apply bg-light-blue
 
   @screen c11
     #sidebar
       @apply w-5c
       @apply fixed h-screen overflow-y-scroll
       @apply border-r
-
-  @screen c17
-    #app
-      @apply text-base
 
 </style>

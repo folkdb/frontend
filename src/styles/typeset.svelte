@@ -47,12 +47,6 @@
   .typeset dd
     @apply text-sm-narrow
     
-  @screen c17
-    .typeset li,
-    .typeset dt,
-    .typeset dd
-      @apply text-base-narrow
-    
   .typeset li:not(:last-child)
     @apply mb-1b
   

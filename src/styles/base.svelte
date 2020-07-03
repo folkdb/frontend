@@ -42,11 +42,7 @@
   
   pre
     @apply text-xs
-  
-  
-  @screen c17
-    pre
-      @apply text-sm
+
       
   /* HEADINGS */
   
@@ -61,20 +57,6 @@
   h5:not(.unstyled),
   h6:not(.unstyled)
     @apply font-semibold text-sm-narrow
-  
-  
-  @screen c17
-    h1:not(.unstyled)
-      @apply text-xl-narrow
-    
-    h2:not(.unstyled)
-      @apply text-lg-narrow
-    
-    h3:not(.unstyled),
-    h4:not(.unstyled),
-    h5:not(.unstyled),
-    h6:not(.unstyled)
-      @apply text-base-narrow
   
   
   /* BUTTONS */

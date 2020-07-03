@@ -17,6 +17,12 @@
     }
   });
   
+  const formatTranscription = (t) => {
+    const pub = t.publication || {};
+    
+    return `${pub.title} (${pub.year})`
+  };
+  
 </script>
 
 <template lang="pug">
@@ -30,7 +36,7 @@
         
           ul
             +each('song.transcriptions as t')
-              li {t.publication.title} ({t.publication.year})
+              li {formatTranscription(t)}
           
     
       section
