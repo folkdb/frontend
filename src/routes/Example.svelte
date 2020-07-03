@@ -1,25 +1,28 @@
 <script>
   import { onMount } from 'svelte';
   
-  let song = {};
-
-  const loadData = async () => {
-    const res = await fetch('/.netlify/functions/fetch-data');
-    return res.json();
-  };
+  let song = false;
+  let errMsg = false;
   
   onMount(async () => {
-    song = await loadData();
+    const res = await fetch('/.netlify/functions/fetch-data');
+    const json = await res.json();
+    
+    if (json.data) {
+      song = json.data;
+    }
+    
+    if (json.error) {
+      errMsg = json.error;
+    }
   });
   
 </script>
 
 <template lang="pug">
-  +if('song.data')
-    - const s = song.data
-
+  +if('song')
     .typeset
-      h1 {s.canonicalName}
+      h1 {song.canonicalName}
 
       section
         h2 Transcriptions
@@ -30,8 +33,8 @@
       section
         h2 Arrangements
     
-    +elseif('song.error')
-      code.error {song.error}
+    +elseif('errMsg')
+      code.error {errMsg}
 
 </template>
 
