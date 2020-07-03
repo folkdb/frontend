@@ -1,23 +1,30 @@
 <script>
   import { onMount } from 'svelte';
   
-  let loaded = '';
+  let song = {};
 
   const loadData = async () => {
     const res = await fetch('/.netlify/functions/fetch-data');
-    const text = await res.text();
-    
-    return text;
+    return res.json();
   };
   
   onMount(async () => {
-    loaded = await loadData();
+    song = await loadData();
   });
   
 </script>
 
 <template lang="pug">
-  h1 Example
-  div= '{loaded}'
+  +if('song.error')
+    .error {song.error}
+
+  +elseif('song.data')
+    h1 {song.data.canonicalName}
+
+    h2 Transcriptions
+    
+    h2 Recordings
+    
+    h2 Arrangements
 
 </template>

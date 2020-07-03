@@ -1,6 +1,5 @@
 <style lang="postcss" global>
-  
-  
+
   /* PARAGRAPHS */
   
   .typeset p:not(:first-child)
@@ -8,7 +7,6 @@
   
   .typeset p:not(:last-child)
     @apply mb-1b
-  
   
   /* HEADINGS */
   
@@ -31,7 +29,6 @@
   .typeset h5:not(:last-child),
   .typeset h6:not(:last-child)
     @apply mb-1b
-  
   
   /* LISTS */
   
@@ -70,7 +67,6 @@
   .typeset ul:not(.unstyled) li
     padding-left: 1.5rem
     text-indent: -1.5rem
-  
   
   /* BLOCKS */
   
