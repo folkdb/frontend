@@ -16,8 +16,10 @@
 
 <template lang="pug">
   +if('song.data')
+    - const s = song.data
+
     .typeset
-      h1 {song.data.canonicalName}
+      h1 {s.canonicalName}
 
       section
         h2 Transcriptions
