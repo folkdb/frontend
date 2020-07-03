@@ -19,8 +19,12 @@
   
   const formatTranscription = (t) => {
     const pub = t.publication || {};
-    
-    return `${pub.title} (${pub.year})`
+    return `${pub.title} (${pub.year})`;
+  };
+  
+  const formatRecording = (rec) => {
+    const rel = rec.release || {};
+    return `${rec.artists} (${rel.year})`;
   };
   
 </script>
@@ -38,12 +42,17 @@
             +each('song.transcriptions as t')
               li {formatTranscription(t)}
           
+      +if('song.recordings')
+        section
+          h2 Recordings
+        
+          ul
+            +each('song.recordings as r')
+            li {formatRecording(r)}
     
-      section
-        h2 Recordings
-    
-      section
-        h2 Arrangements
+      +if('song.arrangements')
+        section
+          h2 Arrangements
     
     +elseif('errMsg')
       code.error {errMsg}
