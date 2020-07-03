@@ -24,8 +24,14 @@
     .typeset
       h1 {song.canonicalName}
 
-      section
-        h2 Transcriptions
+      +if('song.transcriptions')
+        section
+          h2 Transcriptions
+        
+          ul
+            +each('song.transcriptions as t')
+              li {t.publication.title} ({t.publication.year})
+          
     
       section
         h2 Recordings
