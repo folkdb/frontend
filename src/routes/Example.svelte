@@ -22,7 +22,7 @@
     
     if (t.publication) {
       const pub = t.publication;
-      str += t.pageNumber ? `p. ${pageNumber} in ` : '';
+      str += t.pageNumber ? `p. ${t.pageNumber} in ` : '';
       str += pub.primaryAuthor ? `${pub.primaryAuthor}, ` : '';
       str += pub.url ? `<a href="${pub.url}">` : '';
       str += pub.title ? pub.title : '[source]';
@@ -54,7 +54,7 @@
         
           ul
             +each('song.transcriptions as t')
-              li= '{formatTranscription(t)}'
+              li= '{@html formatTranscription(t)}'
           
       +if('song.recordings')
         section
