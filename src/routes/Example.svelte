@@ -18,10 +18,10 @@
   });
   
   const formatTranscription = (t) => {
-    const pub = t.publication || {};
     let str = '';
     
-    if (pub) {
+    if (t.publication) {
+      const pub = t.publication;
       str += t.pageNumber ? `p. ${pageNumber} in ` : '';
       str += pub.primaryAuthor ? `${pub.primaryAuthor}, ` : '';
       str += pub.url ? `<a href="${pub.url}">` : '';
@@ -46,30 +46,30 @@
 <template lang="pug">
   +if('song')
     .typeset
-      h1 {song.canonicalName}
+      h1= '{song.canonicalName}'
 
       +if('song.transcriptions')
         section
-          h2 Transcriptions
+          h2= 'Transcriptions'
         
           ul
             +each('song.transcriptions as t')
-              li {@html formatTranscription(t)}
+              li= '{@html formatTranscription(t)}'
           
       +if('song.recordings')
         section
-          h2 Recordings
+          h2= 'Recordings'
         
           ul
             +each('song.recordings as r')
-              li {formatRecording(r)}
+              li= '{formatRecording(r)}'
     
       +if('song.arrangements')
         section
-          h2 Arrangements
+          h2= 'Arrangements'
     
     +elseif('errMsg')
-      code.error {errMsg}
+      code.error= '{errMsg}'
 
 </template>
 
