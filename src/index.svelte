@@ -37,6 +37,6 @@
 
   @screen c21
     #sidebar
-    @apply w-5c
+      @apply w-5c
 
 </style>
