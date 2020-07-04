@@ -54,7 +54,7 @@
         
           ul
             +each('song.transcriptions as t')
-              li= '{@html formatTranscription(t)}'
+              li= '{formatTranscription(t)}'
           
       +if('song.recordings')
         section
