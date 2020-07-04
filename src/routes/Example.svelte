@@ -19,7 +19,21 @@
   
   const formatTranscription = (t) => {
     const pub = t.publication || {};
-    return `${pub.title} (${pub.year})`;
+    let str = '';
+    
+    if (pub) {
+      str += t.pageNumber ? `p. ${pageNumber} in ` : '';
+      str += pub.primaryAuthor ? `${pub.primaryAuthor}, ` : '';
+      str += pub.url ? `<a href="${pub.url}">` : '';
+      str += pub.title ? pub.title : '[source]';
+      str += pub.url ? '</a>' : '';
+      str += pub.year ? ` (${pub.year})` : '';
+    }
+    
+    str += t.title ? ` as "${t.title}"` : '';
+    str += t.url ? ` <a href="${t.url}">[image]</a>` : '';
+    
+    return str;
   };
   
   const formatRecording = (rec) => {
@@ -40,7 +54,7 @@
         
           ul
             +each('song.transcriptions as t')
-              li {formatTranscription(t)}
+              li {@html formatTranscription(t)}
           
       +if('song.recordings')
         section

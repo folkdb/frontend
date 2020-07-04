@@ -26,12 +26,12 @@
   
   #sidebar
     @apply w-full
-    @apply border-medium-dark-blue
-    @apply bg-light-blue
+    @apply border-medium-orange
+    @apply bg-light-orange
 
   @screen c11
     #sidebar
-      @apply w-5c
+      @apply w-4c
       @apply fixed h-screen overflow-y-scroll
       @apply border-r
 

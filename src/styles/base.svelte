@@ -85,10 +85,5 @@
   section
     @apply w-full
     @apply pb-2b
-  
-  
-  @screen c17
-    section
-      @apply pb-3b
 
 </style>
