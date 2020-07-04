@@ -17,6 +17,10 @@
     }
   });
   
+  const formatLink = (text, url) => (
+    ` <a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`
+  );
+  
   const formatTranscription = (t) => {
     let str = '';
     let pub = false;
@@ -34,10 +38,10 @@
     }
     
     str += t.title ? ` as "${t.title}"` : '';
-    str += t.url ? ` <a href="${t.url}">[image]</a>` : '';
+    str += t.url ? formatLink('[image]', t.url) : '';
     
     if (pub) {
-      str += pub.url ? ` <a href="${pub.url}">[source]</a>` : '';
+      str += pub.url ? formatLink('[source]', pub.url) : '';
     }
     
     return str;

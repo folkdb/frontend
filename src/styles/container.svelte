@@ -5,9 +5,9 @@
   
   @screen c11
     .container
-      @apply max-w-full
+      @apply max-w-20c
       @apply mx-0
-      @apply pr-1b
-      padding-left: 21rem
+      @apply pr-2b
+      padding-left: 18rem
   
 </style>

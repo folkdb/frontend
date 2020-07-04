@@ -11,8 +11,8 @@
   footer
     @apply w-screen min-h-7c
     @apply pt-2b
-    @apply bg-darker-blue
-    @apply text-white text-sm
+    @apply bg-light-blue
+    @apply text-dark text-sm
   
   section
     @apply text-center
