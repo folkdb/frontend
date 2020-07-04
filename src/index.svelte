@@ -35,4 +35,8 @@
       @apply fixed h-screen overflow-y-scroll
       @apply border-r
 
+  @screen c21
+    #sidebar
+    @apply w-5c
+
 </style>

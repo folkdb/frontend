@@ -5,9 +5,14 @@
   
   @screen c11
     .container
-      @apply max-w-20c
+      @apply max-w-19c
       @apply mx-0
       @apply pr-2b
       padding-left: 18rem
+
+  @screen c21
+    .container
+      @apply max-w-20c
+      padding-left: 22rem
   
 </style>

@@ -27,7 +27,6 @@
     
     if (t.publication) {
       pub = t.publication;
-      str += t.pageNumber ? `p. ${t.pageNumber} in ` : '';
       str += pub.primaryAuthor ? `${pub.primaryAuthor}, ` : '';
       str += pub.title ? pub.title : '';
       str += pub.place || pub.year ? ' (' : '';
@@ -37,6 +36,7 @@
       str += pub.place || pub.year ? ')' : '';
     }
     
+    str += t.pageNumber ? `, p. ${t.pageNumber}` : '';
     str += t.title ? ` as "${t.title}"` : '';
     str += t.url ? formatLink('[image]', t.url) : '';
     
