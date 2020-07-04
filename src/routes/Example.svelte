@@ -19,19 +19,26 @@
   
   const formatTranscription = (t) => {
     let str = '';
+    let pub = false;
     
     if (t.publication) {
-      const pub = t.publication;
+      pub = t.publication;
       str += t.pageNumber ? `p. ${t.pageNumber} in ` : '';
       str += pub.primaryAuthor ? `${pub.primaryAuthor}, ` : '';
-      str += pub.url ? `<a href="${pub.url}">` : '';
-      str += pub.title ? pub.title : '[source]';
-      str += pub.url ? '</a>' : '';
-      str += pub.year ? ` (${pub.year})` : '';
+      str += pub.title ? pub.title : '';
+      str += pub.place || pub.year ? ' (' : '';
+      str += pub.place ? pub.place : '';
+      str += pub.place && pub.year ? ', ' : '';
+      str += pub.year ? pub.year : '';
+      str += pub.place || pub.year ? ')' : '';
     }
     
     str += t.title ? ` as "${t.title}"` : '';
     str += t.url ? ` <a href="${t.url}">[image]</a>` : '';
+    
+    if (pub) {
+      str += pub.url ? ` <a href="${pub.url}">[source]</a>` : '';
+    }
     
     return str;
   };
