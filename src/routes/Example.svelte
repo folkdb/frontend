@@ -17,8 +17,26 @@
     }
   });
   
-  const formatLink = (text, url) => (
-    ` <a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`
+  const formatNullable = (before, val, after = '') => (
+    val ? `${before}${val}${after}` : '';
+  );
+  
+  const formatPair = (before, a, b, after = '') => (
+    a || b 
+      ? `${before}${[a, b].join(', ')}${after}` 
+      : ''
+  );
+  
+  const formatList = (before, arr = [], after = '') => (
+    arr.length > 1
+      ? `${arr.slice(0, -1).join(', ')} and ${arr.slice(-1)}`
+      : arr[0] || ''
+  );
+  
+  const formatLink = (before, text, url, after = '') => (
+    url
+      ? `${before}<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>${after}`
+      : ''
   );
   
   const formatTranscription = (t) => {
@@ -27,29 +45,41 @@
     
     if (t.publication) {
       pub = t.publication;
-      str += pub.primaryAuthor ? `${pub.primaryAuthor}, ` : '';
-      str += pub.title ? pub.title : '';
-      str += pub.place || pub.year ? ' (' : '';
-      str += pub.place ? pub.place : '';
-      str += pub.place && pub.year ? ', ' : '';
-      str += pub.year ? pub.year : '';
-      str += pub.place || pub.year ? ')' : '';
+      str += formatNullable('', pub.primaryAuthor, ', ');
+      str += formatNullable('', pub.title);
+      str += formatPair(' (', pub.place, pub.year, ')');
     }
     
-    str += t.pageNumber ? `, p. ${t.pageNumber}` : '';
-    str += t.title ? ` as "${t.title}"` : '';
-    str += t.url ? formatLink('[image]', t.url) : '';
-    
-    if (pub) {
-      str += pub.url ? formatLink('[source]', pub.url) : '';
-    }
+    str += formatNullable(', p. ', t.pageNumber);
+    str += formatNullable(' as "', t.title, '"');
+    str += formatLink(' ', '[image]', t.url);
+    str += pub ? formatLink(' ', '[source]', pub.url) : '';
     
     return str;
   };
   
-  const formatRecording = (rec) => {
-    const rel = rec.release || {};
-    return `${rec.artists} (${rel.year})`;
+  const formatRecording = (r) => {
+    let str = '';
+    let rel = false;
+    
+    str += formatList('', r.artists);
+    str += formatPair(' recorded ', r.date, r.place)
+    
+    if (r.release) {
+      rel = r.release;
+      str += r.date || r.place ? ', released' : '';
+      str += formatNullable(' on ', rel.title);
+      str += formatPair(' (', rel.label, rel.year, ')');
+    }
+    
+    if (r.compilation) {
+      comp = r.compilation;
+      str += rel ? ','
+      str += formatNullable(' reissued on ', comp.title);
+      str += formatPair(' (', comp.label, comp.year, ')');
+    }
+    
+    return str;
   };
   
 </script>
