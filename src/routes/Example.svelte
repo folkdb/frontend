@@ -18,7 +18,7 @@
   });
   
   const formatNullable = (before, val, after = '') => (
-    val ? `${before}${val}${after}` : '';
+    val ? `${before}${val}${after}` : ''
   );
   
   const formatPair = (before, a, b, after = '') => (
@@ -74,7 +74,7 @@
     
     if (r.compilation) {
       comp = r.compilation;
-      str += rel ? ','
+      str += rel ? ',' : '';
       str += formatNullable(' reissued on ', comp.title);
       str += formatPair(' (', comp.label, comp.year, ')');
     }
@@ -103,7 +103,7 @@
         
           ul
             +each('song.recordings as r')
-              li= '{formatRecording(r)}'
+              li= '{@html formatRecording(r)}'
     
       +if('song.arrangements')
         section
