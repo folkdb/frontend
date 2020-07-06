@@ -29,8 +29,8 @@
   
   const formatList = (before, arr = [], after = '') => (
     arr.length > 1
-      ? `${arr.slice(0, -1).join(', ')} and ${arr.slice(-1)}`
-      : arr[0] || ''
+      ? `${before}${arr.slice(0, -1).join(', ')} and ${arr.slice(-1)}${after}`
+      : `${before}${arr[0]}${after}` || ''
   );
   
   const formatLink = (before, text, url, after = '') => (
@@ -70,14 +70,14 @@
       rel = r.release;
       str += r.date || r.place ? ', released' : '';
       str += formatNullable(' on <em>', rel.title, '</em>');
-      str += formatPair(' (', rel.label, rel.year, ')');
+      str += formatPair(' (', rel.label, ', ', rel.year, ')');
     }
     
     if (r.compilation) {
       comp = r.compilation;
       str += rel ? ',' : '';
       str += formatNullable(' reissued on <em>', comp.title, '</em>');
-      str += formatPair(' (', comp.label, comp.year, ')');
+      str += formatPair(' (', comp.label, ', ', gcomp.year, ')');
     }
     
     return str;
