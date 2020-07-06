@@ -63,7 +63,7 @@
     let rel = false;
     
     str += formatList('', r.artists);
-    str += formatPair(' recorded ', r.date, r.place)
+    str += formatPair(' recorded ', r.date, r.place);
     
     if (r.release) {
       rel = r.release;
