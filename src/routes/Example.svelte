@@ -23,7 +23,7 @@
   
   const formatPair = (before, a, b, after = '') => (
     a || b 
-      ? `${before}${[a, b].join(', ')}${after}` 
+      ? `${before}${[].concat(a || [], b || []).join(', ')}${after}` 
       : ''
   );
   
@@ -46,7 +46,7 @@
     if (t.publication) {
       pub = t.publication;
       str += formatNullable('', pub.primaryAuthor, ', ');
-      str += formatNullable('', pub.title);
+      str += formatNullable('<em>', pub.title, '</em>');
       str += formatPair(' (', pub.place, pub.year, ')');
     }
     
@@ -69,14 +69,14 @@
     if (r.release) {
       rel = r.release;
       str += r.date || r.place ? ', released' : '';
-      str += formatNullable(' on ', rel.title);
+      str += formatNullable(' on <em>', rel.title, '</em>');
       str += formatPair(' (', rel.label, rel.year, ')');
     }
     
     if (r.compilation) {
       comp = r.compilation;
       str += rel ? ',' : '';
-      str += formatNullable(' reissued on ', comp.title);
+      str += formatNullable(' reissued on <em>', comp.title, '</em>');
       str += formatPair(' (', comp.label, comp.year, ')');
     }
     
