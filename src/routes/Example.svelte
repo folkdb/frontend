@@ -61,6 +61,7 @@
   const formatRecording = (r) => {
     let str = '';
     let rel = false;
+    let comp = false;
     
     str += formatList('', r.artists);
     str += formatPair(' recorded ', r.date, r.place);
