@@ -77,7 +77,7 @@
       comp = r.compilation;
       str += rel ? ',' : '';
       str += formatNullable(' reissued on <em>', comp.title, '</em>');
-      str += formatPair(' (', comp.label, ', ', gcomp.year, ')');
+      str += formatPair(' (', comp.label, ', ', comp.year, ')');
     }
     
     return str;
