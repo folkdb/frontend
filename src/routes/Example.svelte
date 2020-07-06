@@ -21,9 +21,9 @@
     val ? `${before}${val}${after}` : ''
   );
   
-  const formatPair = (before, a, b, after = '') => (
+  const formatPair = (before, a, sep, b, after = '') => (
     a || b 
-      ? `${before}${[].concat(a || [], b || []).join(', ')}${after}` 
+      ? `${before}${[].concat(a || [], b || []).join(sep)}${after}` 
       : ''
   );
   
@@ -45,9 +45,9 @@
     
     if (t.publication) {
       pub = t.publication;
-      str += formatNullable('', pub.primaryAuthor, ', ');
+      str += formatNullable('<strong>', pub.primaryAuthor, '</strong>, ');
       str += formatNullable('<em>', pub.title, '</em>');
-      str += formatPair(' (', pub.place, pub.year, ')');
+      str += formatPair(' (', pub.place, ', ', pub.year, ')');
     }
     
     str += formatNullable(', p. ', t.pageNumber);
@@ -63,8 +63,8 @@
     let rel = false;
     let comp = false;
     
-    str += formatList('', r.artists);
-    str += formatPair(' recorded ', r.date, r.place);
+    str += formatList('<strong>', r.artists, '</strong>');
+    str += formatPair(' recorded ', r.date, ' in ', r.place);
     
     if (r.release) {
       rel = r.release;
