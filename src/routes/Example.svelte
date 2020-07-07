@@ -61,7 +61,7 @@
       formatList('<strong>', r.artists, '</strong>'),
       r.date || r.place ? ' recorded ' : '',
       formatNullable('', r.date),
-      r.date && r.place ? ' ' : '';
+      r.date && r.place ? ' ' : '',
       formatNullable('in ', r.place),
       rel && (r.date || r.place) ? ', released' : '',
       formatNullable(' on <em>', rel.title, '</em>'),
