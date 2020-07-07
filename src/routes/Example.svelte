@@ -39,20 +39,6 @@
       : ''
   );
   
-  const formatTranscription = (t) => {
-    const pub = t.publication || {};
-    
-    return [
-      formatNullable('<strong>', pub.primaryAuthor, '</strong>, '),
-      formatNullable('<em>', pub.title, '</em>'),
-      formatPair(' (', pub.place, ', ', pub.year, ')'),
-      formatNullable(', p. ', t.pageNumber),
-      formatNullable(' as "', t.title, '"'),
-      formatLink(' ', '[image]', t.url),
-      formatLink(' ', '[source]', pub.url),
-    ].join('');
-  };
-  
   const formatRecording = (r) => {
     const rel = r.release || {};
     const comp = r.compilation || {};
@@ -101,32 +87,48 @@
     ].join('');
   };
   
+  const formatTranscription = (t) => {
+    const pub = t.publication || {};
+    
+    return [
+      formatNullable('<strong>', pub.primaryAuthor, '</strong>, '),
+      formatNullable('<em>', pub.title, '</em>'),
+      formatPair(' (', pub.place, ', ', pub.year, ')'),
+      formatNullable(', p. ', t.pageNumber),
+      formatNullable(' as "', t.title, '"'),
+      formatLink(' ', '[image]', t.url),
+      formatLink(' ', '[source]', pub.url),
+    ].join('');
+  };
+  
 </script>
 
 <template lang="pug">
   +if('song')
     .typeset
       h1= '{song.canonicalName}'
+      
+      +if('song.recordings')
+        section
+          h2= 'Selected Recordings'
+        
+          ul
+            +each('song.recordings as r')
+            li= '{@html formatRecording(r)}'
 
       +if('song.transcriptions')
         section
-          h2= 'Transcriptions'
+          h2= 'Text Sources'
         
           ul
             +each('song.transcriptions as t')
               li= '{@html formatTranscription(t)}'
-          
-      +if('song.recordings')
-        section
-          h2= 'Recordings'
-        
-          ul
-            +each('song.recordings as r')
-              li= '{@html formatRecording(r)}'
     
       +if('song.arrangements')
         section
-          h2= 'Arrangements'
+          h2= 'Arrangement'
+          
+          div = '{@html song.arrangements[0]}'
     
     +elseif('errMsg')
       code.error= '{errMsg}'
