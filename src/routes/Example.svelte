@@ -84,8 +84,8 @@
       comp.discogsId
         ? formatLink(' ', '[Discogs]', `https://www.discogs.com/release/${comp.discogsId}`)
         : '',
-      formatLink(' ', '[info]', rel.url),
-      Object.keys(strm).length > 0 ? ', streaming audio:' : '',
+      formatLink(' ', '[info]', comp.url),
+      Object.keys(strm).length > 0 ? ', streaming on' : '',
       strm.archiveId
         ? formatLink(' ', '[archive.org]', `https://archive.org/details/${strm.archiveId}`)
         : '',
