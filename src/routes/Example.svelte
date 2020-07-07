@@ -49,13 +49,16 @@
       formatNullable(', p. ', t.pageNumber),
       formatNullable(' as "', t.title, '"'),
       formatLink(' ', '[image]', t.url),
-      pub ? formatLink(' ', '[source]', pub.url) : '',
+      formatLink(' ', '[source]', pub.url),
     ].join('');
   };
   
   const formatRecording = (r) => {
     const rel = r.release || {};
     const comp = r.compilation || {};
+    const strm = r.streaming || {};
+    const hasRelInfo = rel.title || rel.isSingle || rel.label || rel.year || rel.discogsId;
+    const hasCompInfo = comp.title || comp.label || comp.year || comp.discogsId;
     
     return [
       formatList('<strong>', r.artists, '</strong>'),
@@ -63,13 +66,38 @@
       formatNullable('', r.date),
       r.date && r.place ? ' ' : '',
       formatNullable('in ', r.place),
-      rel && (r.date || r.place) ? ', released' : '',
+      r.dahrId 
+        ? formatLink(' ', '[DAHR]', `https://adp.library.ucsb.edu/index.php/matrix/detail/${r.dahrId}`)
+        : '',
+      formatLink(' ', '[info]', r.url),
+      hasRelInfo && (r.date || r.place) ? ', released' : '',
       formatNullable(' on <em>', rel.title, '</em>'),
       rel.isSingle ? ' as single' : '',
       formatPair(' (', rel.label, ', ', rel.year, ')'),
-      rel && comp ? ',' : '',
+      rel.discogsId
+        ? formatLink(' ', '[Discogs]', `https://www.discogs.com/release/${rel.discogsId}`)
+        : '',
+      formatLink(' ', '[info]', rel.url),
+      hasRelInfo && hasCompInfo ? ',' : '',
       formatNullable(' reissued on <em>', comp.title, '</em>'),
       formatPair(' (', comp.label, ', ', comp.year, ')'),
+      comp.discogsId
+        ? formatLink(' ', '[Discogs]', `https://www.discogs.com/release/${comp.discogsId}`)
+        : '',
+      formatLink(' ', '[info]', rel.url),
+      Object.keys(strm).length > 0 ? ', streaming audio:' : '',
+      strm.archiveId
+        ? formatLink(' ', '[archive.org]', `https://archive.org/details/${strm.archiveId}`)
+        : '',
+      strm.spotifyId
+        ? formatLink(' ', '[Spotify]', `https://open.spotify.com/track/${strm.spotifyId}`)
+        : '',
+      strm.tidalId
+        ? formatLink(' ', '[TIDAL]', `https://listen.tidal.com/track/${strm.tidalId}`)
+        : '',
+      strm.youtubeId
+        ? formatLink(' ', '[YouTube]', `https://www.youtube.com/watch?v=${strm.youtubeId}`)
+        : ''
     ].join('');
   };
   
