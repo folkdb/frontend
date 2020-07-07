@@ -40,47 +40,37 @@
   );
   
   const formatTranscription = (t) => {
-    let str = '';
-    let pub = false;
+    const pub = t.publication || {};
     
-    if (t.publication) {
-      pub = t.publication;
-      str += formatNullable('<strong>', pub.primaryAuthor, '</strong>, ');
-      str += formatNullable('<em>', pub.title, '</em>');
-      str += formatPair(' (', pub.place, ', ', pub.year, ')');
-    }
-    
-    str += formatNullable(', p. ', t.pageNumber);
-    str += formatNullable(' as "', t.title, '"');
-    str += formatLink(' ', '[image]', t.url);
-    str += pub ? formatLink(' ', '[source]', pub.url) : '';
-    
-    return str;
+    return [
+      formatNullable('<strong>', pub.primaryAuthor, '</strong>, '),
+      formatNullable('<em>', pub.title, '</em>'),
+      formatPair(' (', pub.place, ', ', pub.year, ')'),
+      formatNullable(', p. ', t.pageNumber),
+      formatNullable(' as "', t.title, '"'),
+      formatLink(' ', '[image]', t.url),
+      pub ? formatLink(' ', '[source]', pub.url) : '',
+    ].join('');
   };
   
   const formatRecording = (r) => {
-    let str = '';
-    let rel = false;
-    let comp = false;
+    const rel = r.release || {};
+    const comp = r.compilation || {};
     
-    str += formatList('<strong>', r.artists, '</strong>');
-    str += formatPair(' recorded ', r.date, ' in ', r.place);
-    
-    if (r.release) {
-      rel = r.release;
-      str += r.date || r.place ? ', released' : '';
-      str += formatNullable(' on <em>', rel.title, '</em>');
-      str += formatPair(' (', rel.label, ', ', rel.year, ')');
-    }
-    
-    if (r.compilation) {
-      comp = r.compilation;
-      str += rel ? ',' : '';
-      str += formatNullable(' reissued on <em>', comp.title, '</em>');
-      str += formatPair(' (', comp.label, ', ', comp.year, ')');
-    }
-    
-    return str;
+    return [
+      formatList('<strong>', r.artists, '</strong>'),
+      r.date || r.place ? ' recorded ' : '',
+      formatNullable('', r.date),
+      r.date && r.place ? ' ' : '';
+      formatNullable('in ', r.place),
+      rel && (r.date || r.place) ? ', released' : '',
+      formatNullable(' on <em>', rel.title, '</em>'),
+      rel.isSingle ? ' as single' : '',
+      formatPair(' (', rel.label, ', ', rel.year, ')'),
+      rel && comp ? ',' : '',
+      formatNullable(' reissued on <em>', comp.title, '</em>'),
+      formatPair(' (', comp.label, ', ', comp.year, ')'),
+    ].join('');
   };
   
 </script>
