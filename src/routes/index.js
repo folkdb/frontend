@@ -1,5 +1,5 @@
 import Home from './Home.svelte';
-import Example from './Example.svelte';
+import Example from './example/Example.svelte';
 
 
 const routes = [
