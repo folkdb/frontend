@@ -114,7 +114,7 @@
         
           ul
             +each('song.recordings as r')
-            li= '{@html formatRecording(r)}'
+              li= '{@html formatRecording(r)}'
 
       +if('song.transcriptions')
         section
@@ -128,7 +128,7 @@
         section
           h2= 'Arrangement'
           
-          div = '{song.arrangements[0]}'
+          div= '{song.arrangements[0]}'
     
     +elseif('errMsg')
       code.error= '{errMsg}'
