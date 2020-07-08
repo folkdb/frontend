@@ -1,22 +1,16 @@
 import { get } from 'httpie';
 import parseToml from '@iarna/toml/parse-async.js';
-import vextabRenderSvg from '@folkdb/vextab-render-svg';
 
 
 const API_ENDPOINT = 'https://raw.githubusercontent.com/folkdb/seed/master/songs/sumer-is-icumen.toml';
 
 
 export const handler = async (event, context) => {
-  let out;
+  let obj;
 
   try {
     const { data } = await get(API_ENDPOINT);
-    const obj = await parseToml(data);
-    const svgs = await Promise.all(
-      (obj.arrangements || []).map((a) => vextabRenderSvg(a.content)),
-    );
-    
-    out = { ...obj, arrangements: svgs };
+    obj = await parseToml(data);
   } catch (err) {
     return {
       statusCode: err.statusCode || 500,
@@ -26,6 +20,6 @@ export const handler = async (event, context) => {
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ data: out }),
+    body: JSON.stringify({ data: obj }),
   };
 };

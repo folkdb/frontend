@@ -128,7 +128,7 @@
         section
           h2= 'Arrangement'
           
-          div = '{@html song.arrangements[0]}'
+          div = '{song.arrangements[0]}'
     
     +elseif('errMsg')
       code.error= '{errMsg}'
