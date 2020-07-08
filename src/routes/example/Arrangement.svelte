@@ -6,8 +6,14 @@
   export let offset = [0, 0];
   export let options = {};
   
-  onMount(async () => {
-    const { VexTab, Artist, Vex } = (await import('/vextab.js')).default;
+  let src = false;
+  
+  onMount(() => {
+    src = '/vextab.js';
+  });
+  
+  const renderSvg = () => {
+    const { VexTab, Artist, Vex } = window.vextab;
     const Renderer = Vex.Flow.Renderer;
 
     const renderer = new Renderer('target', Renderer.Backends.SVG);
@@ -16,11 +22,14 @@
 
     tab.parse(content);
     artist.render(renderer);
-  })
+  };
   
 </script>
 
 <template lang="pug">
   #target
+  
+  +if('src')
+    script(src='{src}' on:load='{renderSvg}')
 
 </template>
