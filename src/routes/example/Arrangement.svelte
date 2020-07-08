@@ -7,7 +7,7 @@
   export let options = {};
   
   onMount(async () => {
-    const { VexTab, Artist, Vex } = (await import('vextab.js')).default;
+    const { VexTab, Artist, Vex } = (await import('/vextab.js')).default;
     const Renderer = Vex.Flow.Renderer;
 
     const renderer = new Renderer('target', Renderer.Backends.SVG);
