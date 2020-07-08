@@ -108,6 +108,7 @@
   +if('song')
     .typeset
       h1= '{song.canonicalName}'
+      p= '{song.description}'
       
       +if('song.transcriptions')
         section

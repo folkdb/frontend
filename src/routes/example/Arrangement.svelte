@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   
   export let content;
-  export let width = 640;
+  export let width = 832;
   export let offset = [0, 0];
   export let options = {};
   
@@ -33,3 +33,9 @@
     script(src='{src}' on:load='{renderSvg}')
 
 </template>
+
+<style lang="postcss">
+  #target
+    @apply max-w-full
+
+</style>
