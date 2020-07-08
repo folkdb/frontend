@@ -102,17 +102,6 @@
     ].join('');
   };
   
-  const renderVextab = (content, {
-    width = 640,
-    offset = [0, 0],
-    ...options
-  } = {}) => {
-    
-    } catch (err) {
-      console.error(err); 
-    }
-  };
-  
 </script>
 
 <template lang="pug">

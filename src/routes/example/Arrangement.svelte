@@ -2,6 +2,9 @@
   import { onMount } from 'svelte';
   
   export let content;
+  export let width = 640;
+  export let offset = [0, 0];
+  export let options = {};
   
   onMount(async () => {
     const { VexTab, Artist, Vex } = (await import('vextab.js')).default;
