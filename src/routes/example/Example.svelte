@@ -109,25 +109,25 @@
     .typeset
       h1= '{song.canonicalName}'
       
+      +if('song.transcriptions')
+        section
+          h2= 'Transcriptions'
+        
+          ul
+            +each('song.transcriptions as t')
+              li= '{@html formatTranscription(t)}'
+      
       +if('song.recordings')
         section
-          h2= 'Selected Recordings'
+          h2= 'Recordings'
         
           ul
             +each('song.recordings as r')
               li= '{@html formatRecording(r)}'
 
-      +if('song.transcriptions')
-        section
-          h2= 'Text Sources'
-        
-          ul
-            +each('song.transcriptions as t')
-              li= '{@html formatTranscription(t)}'
-    
       +if('song.arrangements')
         section
-          h2= 'Arrangement'
+          h2= 'Arrangements'
           
           Arrangement(content='{song.arrangements[0].content}')
     
