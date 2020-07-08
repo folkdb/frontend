@@ -7,16 +7,16 @@ const API_ENDPOINT = 'https://raw.githubusercontent.com/folkdb/seed/master/songs
 
 
 export const handler = async (event, context) => {
-  let data;
+  let out;
 
   try {
     const { data } = await get(API_ENDPOINT);
     const obj = await parseToml(data);
     const svgs = await Promise.all(
-      (obj.arrangements || []).map(vextabRenderSvg),
+      (obj.arrangements || []).map((a) => vextabRenderSvg(a.content)),
     );
     
-    data = { ...obj, arrangements: svgs };
+    out = { ...obj, arrangements: svgs };
   } catch (err) {
     return {
       statusCode: err.statusCode || 500,
@@ -26,6 +26,6 @@ export const handler = async (event, context) => {
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ data }),
+    body: JSON.stringify({ data: out }),
   };
 };
