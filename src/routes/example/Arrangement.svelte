@@ -12,7 +12,7 @@
   let src;
   
   onMount(() => {
-    src = '/vextab.js',
+    src = '/vextab.js';
   });
   
   const renderSvg = () => {

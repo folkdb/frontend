@@ -31,7 +31,7 @@
     "postcss-preset-env": "^6.7.0",
     "sugarss": "^2.0.0",
     "svelte": "^3.23.2",
-    "svelte-preprocess": "^3.9.12",
+    "svelte-preprocess": "^4.0.6",
     "tailwindcss": "^1.4.6"
   },
   "devDependencies": {
