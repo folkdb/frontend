@@ -6,11 +6,13 @@
   export let offset = [0, 0];
   export let options = {
     space: 10,
-    stave-distance: 20,
+    'stave-distance': 20,
   };
-
+  
+  let src;
+  
   onMount(() => {
-    document.getElementById('script').src = '/vextab.js';
+    src = '/vextab.js',
   });
   
   const renderSvg = () => {
@@ -30,7 +32,8 @@
 <template lang="pug">
   #target
   
-  script#script(on:load='{renderSvg}')
+  +if('src')
+    script(src='{src}' on:load='{renderSvg}')= 'void 0'
 
 </template>
 
