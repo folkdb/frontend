@@ -37,5 +37,6 @@
 <style lang="postcss" global>
   #target > svg
     @apply max-w-full
+    height: auto !important
 
 </style>
