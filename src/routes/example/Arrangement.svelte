@@ -5,8 +5,7 @@
   export let width = 832;
   export let offset = [0, 0];
   export let options = {
-    space: 10,
-    'stave-distance': 20,
+    'font-size': 12,
   };
   
   let src;
