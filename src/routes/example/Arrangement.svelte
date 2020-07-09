@@ -38,5 +38,8 @@
   #target > svg
     @apply max-w-full
     height: auto !important
+  
+  #target > svg rect[fill="white"]
+    fill: #f7f7f7
 
 </style>
