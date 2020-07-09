@@ -4,9 +4,7 @@
   export let content;
   export let width = 832;
   export let offset = [0, 0];
-  export let options = {
-    'font-size': 12,
-  };
+  export let options = {};
   
   let src;
   
