@@ -4,7 +4,10 @@
   export let content;
   export let width = 832;
   export let offset = [0, 0];
-  export let options = {};
+  export let options = {
+    space: 10,
+    stave-distance: 20,
+  };
   
   let src = false;
   
@@ -34,8 +37,8 @@
 
 </template>
 
-<style lang="postcss">
-  #target
+<style lang="postcss" global>
+  #target > svg
     @apply max-w-full
 
 </style>
