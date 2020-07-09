@@ -12,9 +12,10 @@
   "scripts": {
     "build": "rollup -c --silent && del dist/* && svelte-render",
     "build:dev": "rollup -c --silent && del dist/* && svelte-render --development",
+    "local": "npm run build:dev && netlify dev",
     "lint": "eslint src",
     "merge:next": "git checkout master && git pull && git merge next -s recursive -Xtheirs",
-    "serve": "sirv dist -s --port=8080",
+    "serve": "sirv dist -s --port=5000",
     "sync": "git pull && git add . && git commit -m 'automated sync' && git push",
     "test": "npm run lint && npm run build",
     "update": "updtr"
