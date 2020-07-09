@@ -8,11 +8,9 @@
     space: 10,
     stave-distance: 20,
   };
-  
-  let src = false;
-  
+
   onMount(() => {
-    src = '/vextab.js';
+    document.getElementById('script').src = '/vextab.js';
   });
   
   const renderSvg = () => {
@@ -32,8 +30,7 @@
 <template lang="pug">
   #target
   
-  +if('src')
-    script(src='{src}' on:load='{renderSvg}')
+  script#script(on:load='{renderSvg}')
 
 </template>
 
