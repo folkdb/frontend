@@ -19,10 +19,7 @@
     }
   });
   
-  
-  
-  
-  
+
   const formatTranscription = (t) => {
     const pub = t.publication || {};
     
@@ -61,7 +58,7 @@
           ul
             +each('song.recordings as entry')
               li
-                Recording({entry})
+                Recording('{entry}')
 
       +if('song.arrangements')
         section
