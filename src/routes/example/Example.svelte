@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import Arrangement from './Arrangement.svelte';
+  import Recording from './Recording.svelte';
   
   let song = false;
   let errMsg = false;
