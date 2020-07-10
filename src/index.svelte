@@ -18,11 +18,11 @@
 
 
 <style lang="postcss">
-  /* @import 'typeface-barlow' */
+  @import 'typeface-ibm-plex-sans'
 
   #app
     @apply bg-near-white
-    @apply text-darker font-sans font-regular text-sm
+    @apply text-darker font-ibm-plex-sans font-regular text-sm
   
   #sidebar
     @apply w-full

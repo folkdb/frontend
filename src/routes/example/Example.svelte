@@ -107,12 +107,13 @@
 <template lang="pug">
   +if('song')
     .typeset
-      h1= '{song.canonicalName}'
-      p= '{song.description}'
+      .heading
+        h1= '{song.canonicalName}'
+        p= '{song.description}'
       
       +if('song.transcriptions')
         section
-          h2= 'Transcriptions'
+          h3= 'Transcriptions'
         
           ul
             +each('song.transcriptions as t')
@@ -120,7 +121,7 @@
       
       +if('song.recordings')
         section
-          h2= 'Recordings'
+          h3= 'Recordings'
         
           ul
             +each('song.recordings as r')
@@ -128,7 +129,7 @@
 
       +if('song.arrangements')
         section
-          h2= 'Arrangements'
+          h3= 'Arrangements'
           
           Arrangement(content='{song.arrangements[0].content}')
     
@@ -138,8 +139,21 @@
 </template>
 
 <style lang='postcss'>
+  .heading
+    @apply pb-2b
+
+  .heading h1
+    @apply mb-half-b
+
+  .heading p
+    @apply m-0
+ 
   .error
     @apply text-medium-red
+
+  @screen c17
+    .heading
+      @apply pb-3b
 
 </style>
     

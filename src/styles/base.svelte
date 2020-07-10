@@ -11,14 +11,14 @@
   /* INLINE */
   
   a:not(.unstyled)
-    @apply text-medium-blue
+    @apply text-medium-dark-blue-green
   
   .text-white a:not(.unstyled),
   .text-lighter a:not(.unstyled)
     @apply text-bright-green
   
   a:visited:not(.unstyled)
-    @apply text-medium-purple
+    @apply text-medium-dark-blue-purple
   
   .text-white a:visited:not(.unstyled),
   .text-lighter a:visited:not(.unstyled)
@@ -26,7 +26,7 @@
   
   code
     @apply bg-transparent
-    @apply font-source-code-pro
+    @apply font-mono
     
   strong
     @apply font-semibold
@@ -47,16 +47,19 @@
   /* HEADINGS */
   
   h1:not(.unstyled)
-    @apply font-extrabold text-lg-narrow
+    @apply mb-1b
+    @apply font-semibold text-xl leading-none
   
   h2:not(.unstyled)
-    @apply font-bold text-base-narrow
+    @apply mb-half-b
+    @apply font-medium text-lg leading-none
   
   h3:not(.unstyled),
   h4:not(.unstyled),
   h5:not(.unstyled),
   h6:not(.unstyled)
-    @apply font-semibold text-sm-narrow
+    @apply mb-quarter-b
+    @apply text-base leading-none
   
   
   /* BUTTONS */
@@ -85,5 +88,9 @@
   section
     @apply w-full
     @apply pb-2b
+
+  @screen c17
+    section
+      @apply pb-3b
 
 </style>

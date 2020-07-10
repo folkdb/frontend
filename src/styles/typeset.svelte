@@ -42,11 +42,6 @@
   .typeset ul:not(:last-child)
     @apply mb-one-and-half-b
     
-  .typeset li,
-  .typeset dt,
-  .typeset dd
-    @apply text-sm-narrow
-    
   .typeset li:not(:last-child)
     @apply mb-1b
   
@@ -56,7 +51,7 @@
   .typeset ul:not(.unstyled) li::before
     content: "\2022"
     font-size: 1rem
-    letter-spacing: 19.02px
+    letter-spacing: 19px
   
   .typeset ul:not(.unstyled) li
     padding-left: 1.5rem
