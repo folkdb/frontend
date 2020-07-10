@@ -1,5 +1,5 @@
 [build]
-  base    = "/"
+  base = "/"
   functions = "lambda/"
   publish = "dist"
   command = "npm run build:dev"

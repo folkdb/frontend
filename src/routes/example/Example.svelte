@@ -143,10 +143,11 @@
     @apply pb-2b
 
   .heading h1
-    @apply mb-half-b
+    @apply mb-1b
 
   .heading p
     @apply m-0
+    @apply font-medium
  
   .error
     @apply text-medium-red
