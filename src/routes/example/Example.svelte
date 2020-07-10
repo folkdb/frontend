@@ -18,75 +18,9 @@
     }
   });
   
-  const formatNullable = (before, val, after = '') => (
-    val ? `${before}${val}${after}` : ''
-  );
   
-  const formatPair = (before, a, sep, b, after = '') => (
-    a || b 
-      ? `${before}${[].concat(a || [], b || []).join(sep)}${after}` 
-      : ''
-  );
   
-  const formatList = (before, arr = [], after = '') => (
-    arr.length > 1
-      ? `${before}${arr.slice(0, -1).join(', ')} and ${arr.slice(-1)}${after}`
-      : `${before}${arr[0]}${after}` || ''
-  );
   
-  const formatLink = (before, text, url, after = '') => (
-    url
-      ? `${before}<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>${after}`
-      : ''
-  );
-  
-  const formatRecording = (r) => {
-    const rel = r.release || {};
-    const comp = r.compilation || {};
-    const strm = r.streaming || {};
-    const hasRelInfo = rel.title || rel.isSingle || rel.label || rel.year || rel.discogsId;
-    const hasCompInfo = comp.title || comp.label || comp.year || comp.discogsId;
-    
-    return [
-      formatList('<strong>', r.artists, '</strong>'),
-      r.date || r.place ? ' recorded ' : '',
-      formatNullable('', r.date),
-      r.date && r.place ? ' ' : '',
-      formatNullable('in ', r.place),
-      r.dahrId 
-        ? formatLink(' ', '[DAHR]', `https://adp.library.ucsb.edu/index.php/matrix/detail/${r.dahrId}`)
-        : '',
-      formatLink(' ', '[info]', r.url),
-      hasRelInfo && (r.date || r.place) ? ', released' : '',
-      formatNullable(' on <em>', rel.title, '</em>'),
-      rel.isSingle ? ' as single' : '',
-      formatPair(' (', rel.label, ', ', rel.year, ')'),
-      rel.discogsId
-        ? formatLink(' ', '[Discogs]', `https://www.discogs.com/release/${rel.discogsId}`)
-        : '',
-      formatLink(' ', '[info]', rel.url),
-      hasRelInfo && hasCompInfo ? ',' : '',
-      formatNullable(' reissued on <em>', comp.title, '</em>'),
-      formatPair(' (', comp.label, ', ', comp.year, ')'),
-      comp.discogsId
-        ? formatLink(' ', '[Discogs]', `https://www.discogs.com/release/${comp.discogsId}`)
-        : '',
-      formatLink(' ', '[info]', comp.url),
-      Object.keys(strm).length > 0 ? ', streaming on' : '',
-      strm.archiveId
-        ? formatLink(' ', '[archive.org]', `https://archive.org/details/${strm.archiveId}`)
-        : '',
-      strm.spotifyId
-        ? formatLink(' ', '[Spotify]', `https://open.spotify.com/track/${strm.spotifyId}`)
-        : '',
-      strm.tidalId
-        ? formatLink(' ', '[TIDAL]', `https://listen.tidal.com/track/${strm.tidalId}`)
-        : '',
-      strm.youtubeId
-        ? formatLink(' ', '[YouTube]', `https://www.youtube.com/watch?v=${strm.youtubeId}`)
-        : ''
-    ].join('');
-  };
   
   const formatTranscription = (t) => {
     const pub = t.publication || {};
@@ -124,8 +58,9 @@
           h3= 'Recordings'
         
           ul
-            +each('song.recordings as r')
-              li= '{@html formatRecording(r)}'
+            +each('song.recordings as entry')
+              li
+                Recording({entry})
 
       +if('song.arrangements')
         section
