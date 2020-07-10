@@ -59,7 +59,7 @@
   h5:not(.unstyled),
   h6:not(.unstyled)
     @apply mb-quarter-b
-    @apply font-medium text-base leading-none
+    @apply text-base leading-none
   
   
   /* BUTTONS */
