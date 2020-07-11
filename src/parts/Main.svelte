@@ -32,7 +32,12 @@
   main
     .container
       #pageContent
-        svelte:component(this='{currentRoute.component}' '...{params}')
+        svelte:component(
+          this='{currentRoute.component}'
+          '{...currentRoute.params}'
+        )
+      p
+        code= '{JSON.stringify(currentRoute)}'
     
 </template>
 
