@@ -1,5 +1,6 @@
 <script>
   import './styles/index.js';
+  import Header from './parts/Header.svelte';
   import Main from './parts/Main.svelte';
   import Footer from './parts/Footer.svelte';
 
@@ -8,6 +9,8 @@
 
 <template lang="pug">
   #app
+    header
+
     #sidebar
       
     Main
