@@ -3,11 +3,11 @@ import parseToml from '@iarna/toml/parse-async.js';
 
 
 export const handler = async (event) => {
-  const { category, slug } = event.queryStringParameters;
+  const { collection, slug } = event.queryStringParameters;
   let obj;
 
   try {
-    const { data } = await get(`https://raw.githubusercontent.com/folkdb/seed/master/${category}/${slug}.toml`);
+    const { data } = await get(`https://raw.githubusercontent.com/folkdb/seed/master/${collection}/${slug}.toml`);
 
     obj = await parseToml(data);
   } catch (err) {

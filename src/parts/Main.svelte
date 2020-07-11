@@ -4,7 +4,7 @@
   import routes from '../routes/index.js';
   
   
-  let currentRoute = { id: 0, ...routes[0] };
+  let currentRoute = { params: {}, ...routes[0] };
   let Navaid;
 
   onMount(() => {
@@ -36,8 +36,6 @@
           this='{currentRoute.component}'
           '{...currentRoute.params}'
         )
-      p
-        code= '{JSON.stringify(currentRoute)}'
     
 </template>
 

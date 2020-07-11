@@ -10,11 +10,7 @@
   let errMsg = false;
   
   onMount(async () => {
-    if (!slug) {
-      errMsg = 'Error: Song identifier missing from URL.'
-    }
-    
-    const res = await fetch(`/.netlify/functions/fetch-data?category=songs&slug=${slug}`);
+    const res = await fetch(`/.netlify/functions/fetch-data?collection=songs&slug=${slug}`);
     const json = await res.json();
     
     if (json.data) {
