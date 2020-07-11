@@ -1,14 +1,20 @@
 <script>
   import { onMount } from 'svelte';
-  import Arrangement from './Arrangement.svelte';
   import Transcription from './Transcription.svelte';
   import Recording from './Recording.svelte';
+  import Arrangement from './Arrangement.svelte';
+  
+  export let slug;
   
   let song = false;
   let errMsg = false;
   
   onMount(async () => {
-    const res = await fetch('/.netlify/functions/fetch-data');
+    if (!slug) {
+      errMsg = 'Error: Song identifier missing from URL.'
+    }
+    
+    const res = await fetch(`/.netlify/functions/fetch-data?category=songs&slug=${slug}`);
     const json = await res.json();
     
     if (json.data) {

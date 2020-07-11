@@ -2,14 +2,13 @@ import { get } from 'httpie';
 import parseToml from '@iarna/toml/parse-async.js';
 
 
-const API_ENDPOINT = 'https://raw.githubusercontent.com/folkdb/seed/master/songs/sumer-is-icumen.toml';
-
-
-export const handler = async (event, context) => {
+export const handler = async (event) => {
+  const { category, slug } = event.queryStringParameters;
   let obj;
 
   try {
-    const { data } = await get(API_ENDPOINT);
+    const { data } = await get(`https://raw.githubusercontent.com/folkdb/seed/master/${category}/${slug}.toml`);
+
     obj = await parseToml(data);
   } catch (err) {
     return {

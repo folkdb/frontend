@@ -78,7 +78,7 @@
   
 </script>
 
-<template>
-  {@html formatted}
+<template lang="pug">
+  span= '{@html formatted}'
 
 </template>

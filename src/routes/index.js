@@ -1,10 +1,10 @@
 import Home from './Home.svelte';
-import Example from './example/Example.svelte';
+import Song from './song/Song.svelte';
 
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/example', component: Example },
+  { path: '/song/:slug', component: Song },
 ];
 
 

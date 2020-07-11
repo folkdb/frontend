@@ -10,9 +10,9 @@
   onMount(() => {
     Navaid = navaid('/');
     
-    routes.forEach((route, i) => {
-      Navaid.on(route.path, () => { 
-        currentRoute = { id: i, ...route };
+    routes.forEach((route) => {
+      Navaid.on(route.path, (params) => { 
+        currentRoute = { params, ...route };
       })
     });
     
@@ -30,13 +30,9 @@
 
 <template lang="pug">        
   main
-    .container#pageContent
-      .typeset(
-        id='main-tabpanel-{currentRoute.id}'
-        role='tabpanel'
-        aria-labelledby='nav-tab-{currentRoute.id}'
-      )
-        svelte:component(this='{currentRoute.component}')
+    .container
+      #pageContent
+        svelte:component(this='{currentRoute.component}' '...{params}')
     
 </template>
 
@@ -46,7 +42,7 @@
     @apply w-screen min-h-screen
     @apply py-2b
   
-  .typeset
+  #pageContent
     @apply px-1b
 
       
