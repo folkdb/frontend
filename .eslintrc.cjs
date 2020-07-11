@@ -14,6 +14,7 @@ module.exports = {
   overrides: [{
     files: [ '*.svelte' ],
     processor: 'svelte3/svelte3',
+    excludedFiles: 'src/parts/Main.svelte',
   }], 
   rules: {
     'import/no-extraneous-dependencies': [
