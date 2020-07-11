@@ -16,8 +16,8 @@
     @apply bg-medium-dark-blue-green
   
   img
-    @apply width-auto
-    @apply height-full
+    @apply w-auto
+    @apply h-full
   
   #logo
     @apply font-bold text-3xl leading-none
