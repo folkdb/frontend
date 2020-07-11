@@ -9,7 +9,7 @@
 
 <template lang="pug">
   #app
-    header
+    Header
 
     #sidebar
       
