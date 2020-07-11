@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import Arrangement from './Arrangement.svelte';
+  import Transcription from './Transcription.svelte';
   import Recording from './Recording.svelte';
   
   let song = false;
@@ -19,21 +20,6 @@
     }
   });
   
-
-  const formatTranscription = (t) => {
-    const pub = t.publication || {};
-    
-    return [
-      formatNullable('<strong>', pub.primaryAuthor, '</strong>, '),
-      formatNullable('<em>', pub.title, '</em>'),
-      formatPair(' (', pub.place, ', ', pub.year, ')'),
-      formatNullable(', p. ', t.pageNumber),
-      formatNullable(' as "', t.title, '"'),
-      formatLink(' ', '[image]', t.url),
-      formatLink(' ', '[source]', pub.url),
-    ].join('');
-  };
-  
 </script>
 
 <template lang="pug">
@@ -48,8 +34,9 @@
           h3= 'Transcriptions'
         
           ul
-            +each('song.transcriptions as t')
-              li= '{@html formatTranscription(t)}'
+            +each('song.transcriptions as entry')
+              li
+                Transcription('{entry}')
       
       +if('song.recordings')
         section
