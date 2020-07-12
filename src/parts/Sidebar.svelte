@@ -10,8 +10,12 @@
   nav
     @apply z-10
     @apply w-full
+    @apply p-1b
     @apply border-medium-dark-orange
     @apply bg-soft-orange
+  
+  p
+    @apply font-medium
   
   @screen c11
     nav

@@ -10,10 +10,8 @@
 
 <template lang="pug">
   #app
-    Header
-
     Sidebar
-      
+    
     Header
 
     Main
