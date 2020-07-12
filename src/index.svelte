@@ -9,10 +9,10 @@
 
 <template lang="pug">
   #app
-    Header
-
     #sidebar
       
+    Header
+
     Main
     
     Footer
@@ -28,9 +28,10 @@
     @apply text-darker font-ibm-plex-sans font-regular text-sm
   
   #sidebar
+    @apply z-10
     @apply w-full
-    @apply border-medium-orange
-    @apply bg-light-orange
+    @apply border-medium-dark-orange
+    @apply bg-soft-orange
 
   @screen c11
     #sidebar
