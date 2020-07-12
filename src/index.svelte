@@ -14,6 +14,8 @@
 
     Sidebar
       
+    Header
+
     Main
     
     Footer
