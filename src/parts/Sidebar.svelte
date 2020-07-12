@@ -1,8 +1,8 @@
 <template lang="pug">
   nav
     p
-      | The FolkDB database is under development. See below for a sample of
-      | songs available to view.
+      | You’re viewing an open-access preview of FolkDB.
+      | See below for a sample of songs from our database.
   
 </template>
 
@@ -10,18 +10,25 @@
   nav
     @apply z-10
     @apply w-full
-    @apply p-1b
-    @apply border-medium-dark-orange
-    @apply bg-soft-orange
-  
+    @apply px-one-and-half-b
+    @apply border-darker-orange
+    @apply text-light-orange
+    background-color: hsl(45,15%,17%)
+
   p
-    @apply font-medium
+    @apply text-bright-orange
+    @apply font-medium italic text-sm-narrow
   
   @screen c11
     nav
-      @apply w-4c
-      @apply fixed h-screen overflow-y-scroll
+      @apply fixed overflow-y-scroll
+      @apply w-4c min-h-screen
+      @apply pt-6b pb-2b
       @apply border-r
+
+  @screen c17
+    nav
+      @apply pt-7b pb-3b
   
   @screen c21
     nav
