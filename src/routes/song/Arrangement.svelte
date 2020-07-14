@@ -30,7 +30,7 @@
     
     if (data) {
       arrangements = data.arrangements || [];
-      content = arrangements[index];
+      content = arrangements[parseInt(index)];
         
       if (content) {
         src = '/vextab.js';
