@@ -11,9 +11,8 @@
   export let options = {};
   
   let data;
-  let arrangements = data ? data.arrangements || [] : [];
-  let content = arrangements[parseInt(index)];
-  
+  let arrangements;
+  let content;
   let src;
   
   onMount(async () => {
@@ -27,16 +26,18 @@
       ({ data, error } = await fetchSong(slug));
     
       if (data) {
-        arrangements = data.arrangements || [];
-        content = arrangements[index];
-        
-        if (!content) {
-          error = 'Not found';
-        }
-
         sessionHistory.update(
           ({ songs }) => { songs.set(slug, data); },
         );
+      }
+    }
+    
+    if (data) {
+      arrangements = data.arrangements || [];
+      content = arrangements[index];
+        
+      if (!content) {
+        error = 'Not found';
       }
     }
   });
