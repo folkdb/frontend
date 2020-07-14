@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
-  import { sessionHistory } from '../store.js';
+  import { loadedSongs } from '../session-history.js';
   import { fetchSong } from './helpers.js';
   import Transcription from './Transcription.svelte';
   import Recording from './Recording.svelte';
@@ -13,15 +13,15 @@
   let error;
 
   onMount(async () => {
-    data = get(sessionHistory).songs.get(slug);
+    data = get(loadedSongs).get(slug);
   
     if (!data) {
       ({ data, error } = await fetchSong(slug));
     
       if (data) {
-        sessionHistory.update(
-          ({ songs }) => { songs.set(slug, data); },
-        );
+        loadedSongs.update((mp) => {
+          mp.set(slug, data);
+        });
       }
     }
   });
