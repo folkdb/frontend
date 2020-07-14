@@ -1,62 +1,64 @@
 <script>
   import { onMount } from 'svelte';
+  import { get } from 'svelte/store';
+  import sessionHistory from '../store.js';
+  import { fetchSong } from './helpers.js';
   import Transcription from './Transcription.svelte';
   import Recording from './Recording.svelte';
   import Arrangement from './Arrangement.svelte';
   
   export let slug;
   
-  let song = false;
-  let errMsg = false;
+  let data = get(sessionHistory).song.get(slug);
+  let error;
   
   onMount(async () => {
-    const res = await fetch(`/.netlify/functions/fetch-data?collection=songs&slug=${slug}`);
-    const json = await res.json();
+    if (!data) {
+      { data, error } = await fetchSong(slug);
     
-    if (json.data) {
-      song = json.data;
-    }
-    
-    if (json.error) {
-      errMsg = json.error;
+      if (data) {
+        sessionHistory.update(
+          ({ songs }) => { songs.set(slug, data); },
+        );
+      }
     }
   });
   
 </script>
 
 <template lang="pug">
-  +if('song')
+  +if('data')
     .typeset
       .heading
-        h1= '{song.canonicalName}'
-        p= '{song.description}'
+        h1= '{data.canonicalName}'
+        p= '{data.description}'
       
-      +if('song.transcriptions')
+      +if('data.transcriptions')
         section
           h3= 'Transcriptions'
         
           ul
-            +each('song.transcriptions as entry')
+            +each('data.transcriptions as entry')
               li
                 Transcription('{entry}')
       
-      +if('song.recordings')
+      +if('data.recordings')
         section
           h3= 'Recordings'
         
           ul
-            +each('song.recordings as entry')
+            +each('data.recordings as entry')
               li
                 Recording('{entry}')
 
-      +if('song.arrangements')
+      +if('data.arrangements')
         section
           h3= 'Arrangements'
           
-          Arrangement(content='{song.arrangements[0].content}')
+          Arrangement(content='{data.arrangements[0].content}')
     
-    +elseif('errMsg')
-      code.error= '{errMsg}'
+    +elseif('error')
+      code.error= '{error}'
 
 </template>
 

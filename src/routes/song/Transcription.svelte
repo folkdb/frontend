@@ -3,7 +3,7 @@
     formatNullable,
     formatPair,
     formatLink,
-  } from './formatting.js';
+  } from './helpers.js';
   
   export let entry;
   

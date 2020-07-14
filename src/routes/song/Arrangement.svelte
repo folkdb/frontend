@@ -1,15 +1,41 @@
 <script>
   import { onMount } from 'svelte';
+  import { sessionHistory } from '../store.js';
+  import { fetchSong } from './helpers.js';
   
-  export let content;
+  export let slug;
+  export let index = 0;
   export let width = 832;
   export let offset = [0, 0];
   export let options = {};
   
+  let data = get(sessionHistory).song.get(slug);
+  let arrangements = data.arrangements || [];
+  let content = arrangements[index];
+  
   let src;
   
   onMount(() => {
-    src = '/vextab.js';
+    if (!window.vextab) {
+      src = '/vextab.js';
+    }
+    
+    if (!data) {
+      { data, error } = await fetchSong(slug);
+    
+      if (data) {
+        arrangements = data.arrangements || [];
+        content = arrangements[index];
+        
+        if (!content) {
+          error = 'Not found';
+        }
+
+        sessionHistory.update(
+          ({ songs }) => { songs.set(slug, data); },
+        );
+      }
+    }
   });
   
   const renderSvg = () => {

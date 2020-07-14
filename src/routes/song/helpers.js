@@ -1,3 +1,18 @@
+export const fetchSong = async (slug) => {
+  let json;
+
+  try {
+    const response = await fetch(`/.netlify/functions/fetch-data?collection=songs&slug=${slug}`);
+
+    json = await response.json();
+  } catch (error) {
+    return ({ error });
+  }
+      
+  return json;
+}
+
+
 export const formatNullable = (before, val, after = '') => (
   val ? `${before}${val}${after}` : ''
 );
