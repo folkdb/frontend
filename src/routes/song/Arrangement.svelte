@@ -16,10 +16,6 @@
   let src;
   
   onMount(async () => {
-    if (!window.vextab) {
-      src = '/vextab.js';
-    }
-
     data = get(loadedSongs).get(slug);
     
     if (!data) {
@@ -36,7 +32,9 @@
       arrangements = data.arrangements || [];
       content = arrangements[index];
         
-      if (!content) {
+      if (content) {
+        src = '/vextab.js';
+      } else {
         error = 'Not found';
       }
     }
@@ -69,7 +67,7 @@
     @apply max-w-full
     height: auto !important
   
-  #target > svg rect[fill="white"]
-    fill: #f7f7f7
+  /* #target > svg rect[fill="white"]
+    fill: #f7f7f7 */
 
 </style>
