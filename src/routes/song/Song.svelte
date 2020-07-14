@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
-  import sessionHistory from '../store.js';
+  import { sessionHistory } from '../store.js';
   import { fetchSong } from './helpers.js';
   import Transcription from './Transcription.svelte';
   import Recording from './Recording.svelte';
@@ -9,12 +9,14 @@
   
   export let slug;
   
-  let data = get(sessionHistory).song.get(slug);
+  let data;
   let error;
-  
+
   onMount(async () => {
+    data = get(sessionHistory).songs.get(slug);
+  
     if (!data) {
-      { data, error } = await fetchSong(slug);
+      ({ data, error } = await fetchSong(slug));
     
       if (data) {
         sessionHistory.update(
@@ -55,7 +57,7 @@
         section
           h3= 'Arrangements'
           
-          Arrangement(content='{data.arrangements[0].content}')
+          a(href='/arrangement/{slug}/0')= '[view]'
     
     +elseif('error')
       code.error= '{error}'

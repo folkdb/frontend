@@ -1,27 +1,30 @@
 <script>
   import { onMount } from 'svelte';
+  import { get } from 'svelte/store';
   import { sessionHistory } from '../store.js';
   import { fetchSong } from './helpers.js';
   
   export let slug;
-  export let index = 0;
+  export let index = '0';
   export let width = 832;
   export let offset = [0, 0];
   export let options = {};
   
-  let data = get(sessionHistory).song.get(slug);
-  let arrangements = data.arrangements || [];
-  let content = arrangements[index];
+  let data;
+  let arrangements = data ? data.arrangements || [] : [];
+  let content = arrangements[parseInt(index)];
   
   let src;
   
-  onMount(() => {
+  onMount(async () => {
     if (!window.vextab) {
       src = '/vextab.js';
     }
+
+    data = get(sessionHistory).songs.get(slug);
     
     if (!data) {
-      { data, error } = await fetchSong(slug);
+      ({ data, error } = await fetchSong(slug));
     
       if (data) {
         arrangements = data.arrangements || [];
