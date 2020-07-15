@@ -26,7 +26,7 @@
       tab.parse(content);
       artist.render(renderer);
     } else {
-      window.setTimeout(renderSvg, 1000);
+      window.setTimeout(renderSvg, 250);
     }
   };
   
