@@ -1,5 +1,5 @@
 <script>
-  import { onMount, afterUpdate } from 'svelte';
+  import { onMount } from 'svelte';
   import { get } from 'svelte/store';
   import { loadedSongs } from '../session-history.js';
   import { fetchSong } from './helpers.js';
@@ -23,10 +23,12 @@
         loadedSongs.update((mp) => mp.set(slug, data));
       }
     }
-  });
-  
-  afterUpdate(() => {
-    const content = (data.arrangements || [])[parseInt(index)];
+    
+    let content;
+    
+    if (data) {
+      content = (data.arrangements || [])[parseInt(index)];
+    }
     
     if (content && window.vextab) {
       const { VexTab, Artist, Vex } = window.vextab;
