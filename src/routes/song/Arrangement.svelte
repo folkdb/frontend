@@ -14,6 +14,20 @@
   let error;
   let content;
   
+  const renderSvg = (isReady) => {
+    if (isReady) {
+      const { VexTab, Artist, Vex } = window.vextab;
+      const Renderer = Vex.Flow.Renderer;
+
+      const renderer = new Renderer('target', Renderer.Backends.SVG);
+      const artist = new Artist(offset[0], offset[1], width, options);
+      const tab = new VexTab(artist);
+
+      tab.parse(content);
+      artist.render(renderer);
+    }
+  };
+  
   onMount(async () => {
     data = get(loadedSongs).get(slug);
     
@@ -29,27 +43,16 @@
       const arrangement = (data.arrangements || [])[parseInt(index)];
       ({ content } = arrangement || {});
       
-      if (!content) {
+      if (content) {
+        renderSvg(get(vextabReady));
+        vextabReady.subscribe(renderSvg);
+      } else {
         error = `No arrangement for "${slug}" found at index ${index}`;
       }
     } else {
       error = 'Something went wrong when attempting to load the requested data. Try reloading this page.'; 
     }
   });
-  
-  vextabReady.subscribe((isReady) => {
-    if (isReady && content) {
-      const { VexTab, Artist, Vex } = window.vextab;
-      const Renderer = Vex.Flow.Renderer;
-      
-      const renderer = new Renderer('target', Renderer.Backends.SVG);
-      const artist = new Artist(offset[0], offset[1], width, options);
-      const tab = new VexTab(artist);
-      
-      tab.parse(content);
-      artist.render(renderer);
-    }
-  })
   
 </script>
 
