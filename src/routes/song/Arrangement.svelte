@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import { get } from 'svelte/store';
   import { loadedSongs, vextabReady } from '../../store.js';
   import { fetchSong } from './helpers.js';
   
@@ -42,7 +41,7 @@
       ({ content } = arrangement || {});
       
       if (content) {
-        if (get(vextabReady)) {
+        if (window.vextab) {
           renderSvg();
         } else {
           vextabReady.subscribe((isReady) => { 
