@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
-  import { loadedSongs } from '../session-history.js';
+  import { loadedSongs } from '../../store.js';
   import { fetchSong } from './helpers.js';
   import Transcription from './Transcription.svelte';
   import Recording from './Recording.svelte';

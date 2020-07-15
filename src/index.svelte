@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { vextabReady } from './store.js';
   import Header from './parts/Header.svelte';
   import Sidebar from './parts/Sidebar.svelte';
   import Main from './parts/Main.svelte';
@@ -25,7 +26,7 @@
     Footer
   
     +if('contentLoaded')
-      script(src='/vextab.js')= 'void 0'
+      script(src='/vextab.js' on:load='{vextabReady.set(true)}')= 'void 0'
 
 </template>
 

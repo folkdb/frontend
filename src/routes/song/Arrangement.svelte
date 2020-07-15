@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
-  import { loadedSongs } from '../session-history.js';
+  import { loadedSongs, vextabReady } from '../../store.js';
   import { fetchSong } from './helpers.js';
   
   export let slug;
@@ -12,6 +12,7 @@
   
   let data;
   let error;
+  let content;
   
   onMount(async () => {
     data = get(loadedSongs).get(slug);
@@ -24,14 +25,20 @@
       }
     }
     
-    let content;
-    
     if (data) {
       const arrangement = (data.arrangements || [])[parseInt(index)];
       ({ content } = arrangement || {});
+      
+      if (!content) {
+        error = `No arrangement for "${slug}" found at index ${index}`;
+      }
+    } else {
+      error = 'Something went wrong when attempting to load the requested data. Try reloading this page.'; 
     }
-    
-    if (content && window.vextab) {
+  });
+  
+  vextabReady.subscribe((isReady) => {
+    if (isReady && content) {
       const { VexTab, Artist, Vex } = window.vextab;
       const Renderer = Vex.Flow.Renderer;
       
@@ -41,14 +48,8 @@
       
       tab.parse(content);
       artist.render(renderer);
-    } else {
-      error = (
-        content 
-          ? `No arrangement for "${slug}" found at index ${index}`
-          : 'VexTab parser script did not load. Try reloading page.'
-      );
     }
-  });
+  })
   
 </script>
 
