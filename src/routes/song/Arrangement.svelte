@@ -10,13 +10,12 @@
   export let offset = [0, 0];
   export let options = {};
   
-  let data;
-  let arrangements;
+  let error;
   let content;
   let src;
   
   onMount(async () => {
-    data = get(loadedSongs).get(slug);
+    let data = get(loadedSongs).get(slug);
     
     if (!data) {
       ({ data, error } = await fetchSong(slug));
@@ -27,8 +26,7 @@
     }
     
     if (data) {
-      arrangements = data.arrangements || [];
-      content = arrangements[parseInt(index)];
+      content = (data.arrangements || [])[parseInt(index)];
         
       if (content) {
         src = '/vextab.js';
@@ -54,6 +52,8 @@
 
 <template lang="pug">
   #target
+    +if('error')
+      code.error= '{error}'
   
   +if('src')
     script(src='{src}' on:load='{renderSvg}')= 'void 0'
