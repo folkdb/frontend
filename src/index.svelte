@@ -24,7 +24,7 @@
     
     Footer
   
-    +if(contentLoaded)
+    +if('contentLoaded')
       script(src='/vextab.js')= 'void 0'
 
 </template>

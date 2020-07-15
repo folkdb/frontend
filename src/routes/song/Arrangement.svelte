@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, afterUpdate } from 'svelte';
   import { get } from 'svelte/store';
   import { loadedSongs } from '../session-history.js';
   import { fetchSong } from './helpers.js';
