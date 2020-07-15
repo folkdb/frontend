@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { get } from 'svelte/store';
   import { loadedSongs, vextabReady } from '../../store.js';
   import { fetchSong } from './helpers.js';
   
@@ -14,15 +15,19 @@
   let content;
   
   const renderSvg = () => {
-    const { VexTab, Artist, Vex } = window.vextab;
-    const Renderer = Vex.Flow.Renderer;
-
-    const renderer = new Renderer('target', Renderer.Backends.SVG);
-    const artist = new Artist(offset[0], offset[1], width, options);
-    const tab = new VexTab(artist);
-
-    tab.parse(content);
-    artist.render(renderer);
+    if (window.vextab) {
+      const { VexTab, Artist, Vex } = window.vextab;
+      const Renderer = Vex.Flow.Renderer;
+  
+      const renderer = new Renderer('target', Renderer.Backends.SVG);
+      const artist = new Artist(offset[0], offset[1], width, options);
+      const tab = new VexTab(artist);
+  
+      tab.parse(content);
+      artist.render(renderer);
+    } else {
+      window.setTimeout(renderSvg, 1000);
+    }
   };
   
   onMount(async () => {
@@ -41,7 +46,7 @@
       ({ content } = arrangement || {});
       
       if (content) {
-        if (window.vextab) {
+        if (get(vextabReady)) {
           renderSvg();
         } else {
           vextabReady.subscribe((isReady) => { 
