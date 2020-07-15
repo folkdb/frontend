@@ -27,7 +27,7 @@
     let content;
     
     if (data) {
-      content = (data.arrangements || [])[parseInt(index)];
+      { content } = (data.arrangements || [])[parseInt(index)] || {};
     }
     
     if (content && window.vextab) {
