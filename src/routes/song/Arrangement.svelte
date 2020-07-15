@@ -22,9 +22,7 @@
       ({ data, error } = await fetchSong(slug));
     
       if (data) {
-        loadedSongs.update((mp) => {
-          mp.set(slug, data);
-        });
+        loadedSongs.update((mp) => mp.set(slug, data));
       }
     }
     
