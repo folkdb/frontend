@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
-  import { loadedSongs, vextabReady } from '../../store.js';
+  import { vextabReady } from '../../store.js';
   import { fetchSong } from './helpers.js';
   
   export let slug;
@@ -11,10 +11,25 @@
   export let options = {};
   
   let data;
-  let error;
-  let content;
+  let arrangement;
+  let loadError;
+  let parseError;
   
-  const renderSvg = () => {
+  const formatEntry = (entry) => [
+    '<ul>'
+    formatNullable(
+      '<li><strong>Instruments:</strong> ',
+      entry.instruments,
+      '</li>'
+    ),
+    entry.tonic || entry.mode ? '<li>' : '';
+    formatNullable('<strong>Key:</strong> ', entry.tonic, ' '),
+    formatNullable('', entry.mode),
+    entry.tonic || entry.mode ? '</li>' : '';
+    '</ul>'
+  ].join('');
+  
+  const renderSvg = (content) => {
     if (window.vextab) {
       const { VexTab, Artist, Vex } = window.vextab;
       const Renderer = Vex.Flow.Renderer;
@@ -22,53 +37,61 @@
       const renderer = new Renderer('target', Renderer.Backends.SVG);
       const artist = new Artist(offset[0], offset[1], width, options);
       const tab = new VexTab(artist);
-  
-      tab.parse(content);
-      artist.render(renderer);
+      
+      try {
+        tab.parse(content);
+        artist.render(renderer);
+      } catch (err) {
+        parseError = err.message || err;
+      }
     } else {
       window.setTimeout(renderSvg, 250);
     }
   };
   
   onMount(async () => {
-    data = get(loadedSongs).get(slug);
+    ({ data, error } = await fetchSong(slug));
     
-    if (!data) {
-      ({ data, error } = await fetchSong(slug));
+    if (error) { loadError = error; }
     
-      if (data) {
-        loadedSongs.update((mp) => mp.set(slug, data));
+    if (data) {
+      arrangement = (data.arrangements || [])[parseInt(index)];
+      
+      if (!arrangement) {
+        loadError = `You may have arrived here via a broken link or bad URL. There is no arrangement for "${slug}" at index ${index}.`;
       }
     }
     
-    if (data) {
-      const arrangement = (data.arrangements || [])[parseInt(index)];
-      ({ content } = arrangement || {});
-      
-      if (content) {
-        if (get(vextabReady)) {
-          renderSvg();
-        } else {
-          vextabReady.subscribe((isReady) => { 
-            if (isReady) {
-              renderSvg();
-            }
-          }); 
-        }
+    if (arrangement && arrangement.content) {
+      if (get(vextabReady)) {
+        renderSvg(arrangement.content);
       } else {
-        error = `No arrangement for "${slug}" found at index ${index}`;
+        vextabReady.subscribe((isReady) => { 
+          if (isReady) { renderSvg(arrangement.content); }
+        }); 
       }
     } else {
-      error = 'Something went wrong when attempting to load the requested data. Try reloading this page.'; 
+      parseError = 'Oops, something is missing! This arrangement has no notation to parse.' 
     }
   });
   
 </script>
 
 <template lang="pug">
-  #target
-    +if('error')
-      code.error= '{error}'
+  +if('data')
+    .typeset
+      .heading
+        h1= '{data.canonicalName}'
+        
+      +if('arrangement')
+        span= '{@html formatEntry(arrangement)}'
+
+    #target
+      +if('parseError')
+        code.error= 'ERROR: {parseError}'
+  
+  +elseif('loadError')
+    code.error= 'ERROR: {loadError}'
 
 </template>
 

@@ -1,10 +1,23 @@
+import { loadedSongs } from '../../store.js';
+
+
 export const fetchSong = async (slug) => {
+  const data = get(loadedSongs).get(slug);
+  
+  if (data) {
+    return ({ data });
+  }
+  
   let json;
 
   try {
     const response = await fetch(`/.netlify/functions/fetch-data?collection=songs&slug=${slug}`);
 
     json = await response.json();
+    
+    if (json.data) {
+      loadedSongs.update((mp) => mp.set(slug, json.data));
+    }
   } catch (error) {
     return ({ error });
   }

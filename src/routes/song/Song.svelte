@@ -13,15 +13,7 @@
   let error;
 
   onMount(async () => {
-    data = get(loadedSongs).get(slug);
-  
-    if (!data) {
-      ({ data, error } = await fetchSong(slug));
-    
-      if (data) {
-        loadedSongs.update((mp) => mp.set(slug, data));
-      }
-    }
+    ({ data, error } = await fetchSong(slug));
   });
   
 </script>
