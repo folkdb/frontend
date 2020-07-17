@@ -54,27 +54,35 @@
 
     ({ data, error } = await fetchSong(slug));
   
-    if (error) { loadError = error; }
+    arrangement = (
+      data
+        ? (data.arrangements || [])[parseInt(index, 10)]
+        : false
+    );
+    
+    const content = arrangement ? arrangement.content : false;
   
-    if (data) {
-      arrangement = (data.arrangements || [])[parseInt(index, 10)];
-  
-      if (!arrangement) {
-        loadError = `You may have arrived here via a broken link or bad URL. There is no arrangement for "${slug}" at index ${index}.`;
-      }
-    }
-  
-    if (arrangement && arrangement.content) {
+    if (content) {
       if (get(vextabReady)) {
-        renderSvg(arrangement.content);
+        renderSvg(content);
       } else {
         vextabReady.subscribe((isReady) => {
-          if (isReady) { renderSvg(arrangement.content); }
+          if (isReady) { renderSvg(content); }
         });
       }
-    } else {
-      parseError = 'Oops, something is missing! This arrangement has no notation to parse.';
-    }
+    } 
+    
+    loadError = (
+      data && !arrangement
+        ? `You may have arrived here via a broken link or bad URL. There is no arrangement for "${slug}" at index ${index}.`
+        : error
+    );
+    
+    parseError = (
+      arrangement && !content
+        ? 'Oops, something is missing! This arrangement has no notation to parse.'
+        : false
+    );
   });
   
 </script>
@@ -88,8 +96,8 @@
       +if('arrangement')
         span= '{@html formatEntry(arrangement)}'
 
-    +elseif('loadError')
-      code.error= 'ERROR: {loadError}'
+    +elseif('error')
+      code.error= 'ERROR: {error}'
 
   #target
     +if('parseError')
