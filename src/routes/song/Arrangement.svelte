@@ -59,7 +59,7 @@
         ? (data.arrangements || [])[parseInt(index, 10)]
         : false
     );
-    
+  
     const content = arrangement ? arrangement.content : false;
   
     if (content) {
@@ -70,14 +70,14 @@
           if (isReady) { renderSvg(content); }
         });
       }
-    } 
-    
+    }
+  
     loadError = (
       data && !arrangement
         ? `You may have arrived here via a broken link or bad URL. There is no arrangement for "${slug}" at index ${index}.`
         : error
     );
-    
+  
     parseError = (
       arrangement && !content
         ? 'Oops, something is missing! This arrangement has no notation to parse.'
