@@ -87,6 +87,7 @@
   
 </script>
 
+
 <template lang="pug">
   +if('data')
     .typeset
@@ -105,6 +106,7 @@
 
 </template>
 
+
 <style lang="postcss">
   h1
     @apply mb-2b
@@ -115,12 +117,5 @@
   @screen c17
     h1
       @apply mb-3b
-
-</style>
-
-<style lang="postcss" global>
-  #target > svg
-    @apply max-w-full
-    height: auto !important
 
 </style>

@@ -21,6 +21,7 @@
 
 </script>
 
+
 <template lang="pug">
   span= '{@html formatted}'
 

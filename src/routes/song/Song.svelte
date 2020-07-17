@@ -53,6 +53,7 @@
 
 </template>
 
+
 <style lang='postcss'>
   .heading
     @apply pb-2b
