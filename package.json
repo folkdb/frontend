@@ -45,6 +45,7 @@
     "core-js": "^3.6.5",
     "del-cli": "^3.0.0",
     "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-svelte3": "^2.7.3",
     "postcss": "^7.0.32",

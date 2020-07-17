@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
   import { vextabReady } from '../../store.js';
-  import { fetchSong } from './helpers.js';
+  import { fetchSong, formatNullable } from './helpers.js';
   
   export let slug;
   export let index = '0';
@@ -16,28 +16,28 @@
   let parseError;
   
   const formatEntry = (entry) => [
-    '<ul>'
+    '<ul>',
     formatNullable(
       '<li><strong>Instruments:</strong> ',
       entry.instruments,
-      '</li>'
+      '</li>',
     ),
-    entry.tonic || entry.mode ? '<li>' : '';
+    entry.tonic || entry.mode ? '<li>' : '',
     formatNullable('<strong>Key:</strong> ', entry.tonic, ' '),
     formatNullable('', entry.mode),
-    entry.tonic || entry.mode ? '</li>' : '';
-    '</ul>'
+    entry.tonic || entry.mode ? '</li>' : '',
+    '</ul>',
   ].join('');
   
   const renderSvg = (content) => {
     if (window.vextab) {
       const { VexTab, Artist, Vex } = window.vextab;
-      const Renderer = Vex.Flow.Renderer;
+      const { Renderer } = Vex.Flow;
   
       const renderer = new Renderer('target', Renderer.Backends.SVG);
       const artist = new Artist(offset[0], offset[1], width, options);
       const tab = new VexTab(artist);
-      
+  
       try {
         tab.parse(content);
         artist.render(renderer);
@@ -50,28 +50,30 @@
   };
   
   onMount(async () => {
+    let error;
+
     ({ data, error } = await fetchSong(slug));
-    
+  
     if (error) { loadError = error; }
-    
+  
     if (data) {
-      arrangement = (data.arrangements || [])[parseInt(index)];
-      
+      arrangement = (data.arrangements || [])[parseInt(index, 10)];
+  
       if (!arrangement) {
         loadError = `You may have arrived here via a broken link or bad URL. There is no arrangement for "${slug}" at index ${index}.`;
       }
     }
-    
+  
     if (arrangement && arrangement.content) {
       if (get(vextabReady)) {
         renderSvg(arrangement.content);
       } else {
-        vextabReady.subscribe((isReady) => { 
+        vextabReady.subscribe((isReady) => {
           if (isReady) { renderSvg(arrangement.content); }
-        }); 
+        });
       }
     } else {
-      parseError = 'Oops, something is missing! This arrangement has no notation to parse.' 
+      parseError = 'Oops, something is missing! This arrangement has no notation to parse.';
     }
   });
   

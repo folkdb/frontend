@@ -1,4 +1,5 @@
 module.exports = {
+  extends: 'airbnb-base',
   parserOptions: {
     ecmaVersion: '2020',
     sourceType: 'module',
@@ -17,6 +18,15 @@ module.exports = {
     excludedFiles: 'src/parts/Main.svelte',
   }], 
   rules: {
+    'no-undef': 'warn',
+    'no-unused-vars': [
+      'error', 
+      { varsIgnorePattern: '[A-Z]\\w+' },
+    ],
+    'no-multiple-empty-lines': [
+      'error', 
+      { 'max': 2 },
+    ],
     'import/no-extraneous-dependencies': [
       'error',
       { devDependencies: [ 'test/*.js' ] },
@@ -26,6 +36,8 @@ module.exports = {
       'always',
       { ignorePackages: true },
     ],
+    'import/prefer-default-export': 'off',
+    'import/no-mutable-exports': 'off',
   },
   settings: {
     'svelte3/ignore-styles': () => true,

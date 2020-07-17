@@ -1,7 +1,6 @@
 import { get } from 'httpie';
 import parseToml from '@iarna/toml/parse-async.js';
 
-
 export const handler = async (event) => {
   const { collection, slug } = event.queryStringParameters;
   let obj;

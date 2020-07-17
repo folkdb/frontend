@@ -1,7 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import { get } from 'svelte/store';
-  import { loadedSongs } from '../../store.js';
   import { fetchSong } from './helpers.js';
   import Transcription from './Transcription.svelte';
   import Recording from './Recording.svelte';
@@ -15,8 +13,9 @@
   onMount(async () => {
     ({ data, error } = await fetchSong(slug));
   });
-  
+
 </script>
+
 
 <template lang="pug">
   +if('data')

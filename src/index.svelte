@@ -11,7 +11,7 @@
   
   onMount(() => {
     contentLoaded = true;
-  })
+  });
 </script>
 
 

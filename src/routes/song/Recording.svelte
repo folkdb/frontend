@@ -19,14 +19,14 @@
   const hasCompInfo = (
     comp.title || comp.label || comp.year || comp.discogsId
   );
-    
+  
   const recordingDetails = [
     formatList('<strong>', entry.artists, '</strong>'),
     entry.date || entry.place ? ' recorded ' : '',
     formatNullable('', entry.date),
     entry.date && entry.place ? ' ' : '',
     formatNullable('in ', entry.place),
-    entry.dahrId 
+    entry.dahrId
       ? formatLink(' ', '[DAHR]', `https://adp.library.ucsb.edu/index.php/matrix/detail/${entry.dahrId}`)
       : '',
     formatLink(' ', '[info]', entry.url),
