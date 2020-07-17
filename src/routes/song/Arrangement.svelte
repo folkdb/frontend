@@ -18,11 +18,11 @@
   const formatEntry = (entry) => [
     '<ul>',
     formatNullable(
-      '<li> <strong>Instruments:</strong> ',
+      '<li><strong>Instruments:</strong> ',
       entry.instruments,
       '</li>',
     ),
-    entry.tonic || entry.mode ? '<li> ' : '',
+    entry.tonic || entry.mode ? '<li>' : '',
     formatNullable('<strong>Key:</strong> ', entry.tonic, ' '),
     formatNullable('', entry.mode),
     entry.tonic || entry.mode ? '</li>' : '',
@@ -118,7 +118,7 @@
     @apply text-medium-red
 
   @screen c17
-    .heading h1
+    .heading
       @apply pb-3b
 
 </style>
