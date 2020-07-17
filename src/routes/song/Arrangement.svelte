@@ -96,8 +96,8 @@
       +if('arrangement')
         span= '{@html formatEntry(arrangement)}'
 
-    +elseif('error')
-      code.error= 'ERROR: {error}'
+    +elseif('loadError')
+      code.error= 'ERROR: {loadError}'
 
   #target
     +if('parseError')
