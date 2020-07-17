@@ -96,8 +96,8 @@
       +if('arrangement')
         span= '{@html formatEntry(arrangement)}'
 
-    +elseif('loadError')
-      code.error= 'ERROR: {loadError}'
+  +if('loadError')
+    code.error= 'ERROR: {loadError}'
 
   #target
     +if('parseError')
@@ -105,12 +105,22 @@
 
 </template>
 
+<style lang="postcss">
+  h1
+    @apply mb-2b
+ 
+  .error
+    @apply text-medium-red
+
+  @screen c17
+    h1
+      @apply mb-3b
+
+</style>
+
 <style lang="postcss" global>
   #target > svg
     @apply max-w-full
     height: auto !important
-  
-  /* #target > svg rect[fill="white"]
-    fill: #f7f7f7 */
 
 </style>
