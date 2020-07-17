@@ -46,7 +46,7 @@
         section
           h3= 'Arrangements'
           
-          a(href='/arrangement/{slug}/0')= '[view]'
+          a(href='/song/{slug}/arrangement/0')= '[view]'
     
     +elseif('error')
       code.error= '{error}'
