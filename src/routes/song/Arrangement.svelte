@@ -18,11 +18,11 @@
   const formatEntry = (entry) => [
     '<ul>',
     formatNullable(
-      '<li><strong>Instruments:</strong> ',
+      '<li> <strong>Instruments:</strong> ',
       entry.instruments,
       '</li>',
     ),
-    entry.tonic || entry.mode ? '<li>' : '',
+    entry.tonic || entry.mode ? '<li> ' : '',
     formatNullable('<strong>Key:</strong> ', entry.tonic, ' '),
     formatNullable('', entry.mode),
     entry.tonic || entry.mode ? '</li>' : '',
@@ -95,7 +95,7 @@
         h1= '{data.canonicalName}'
         
       +if('arrangement')
-        span= '{@html formatEntry(arrangement)}'
+        section= '{@html formatEntry(arrangement)}'
 
   +if('loadError')
     code.error= 'ERROR: {loadError}'
@@ -108,14 +108,17 @@
 
 
 <style lang="postcss">
-  h1
-    @apply mb-2b
+  .heading
+    @apply pb-2b
+
+  .heading h1
+    @apply m-0
  
   .error
     @apply text-medium-red
 
   @screen c17
-    h1
-      @apply mb-3b
+    .heading h1
+      @apply pb-3b
 
 </style>
