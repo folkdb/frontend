@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { loadedSongs } from '../../store.js';
+import { loadedSongs } from '../store.js';
 
 export const fetchSong = async (slug) => {
   const data = get(loadedSongs).get(slug);
