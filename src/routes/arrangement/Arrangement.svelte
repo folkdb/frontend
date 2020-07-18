@@ -99,12 +99,13 @@
       +if('arrangement')
         section= '{@html formatEntry(arrangement)}'
 
-  +if('loadError')
-    code.error= 'ERROR: {loadError}'
+    +if('loadError')
+      p: code.error= 'ERROR: {loadError}'
 
-  #target
     +if('parseError')
-      code.error= 'ERROR: {parseError}'
+      p: code.error= 'ERROR: {parseError}'
+    
+    #target
 
 </template>
 
