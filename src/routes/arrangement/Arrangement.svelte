@@ -5,7 +5,7 @@
   import { fetchSong, formatNullable } from '../helpers.js';
   
   export let slug;
-  export let index = '0';
+  export let index;
   export let width = 832;
   export let offset = [0, 0];
   export let options = {};
@@ -56,7 +56,7 @@
   
     arrangement = (
       data
-        ? (data.arrangements || [])[parseInt(index, 10)]
+        ? (data.arrangements || [])[parseInt(index || '0', 10)]
         : false
     );
   
