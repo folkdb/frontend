@@ -46,7 +46,10 @@
         section
           h3= 'Arrangements'
           
-          a(href='/song/{slug}/arrangement/0')= '[view]'
+          ul
+            +each('data.arrangements as entry, index')
+              li
+                Arrangement('{entry} {slug} {index}')
     
     +elseif('error')
       code.error= '{error}'
