@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
   import { vextabReady } from '../../store.js';
-  import { fetchSong, formatNullable } from './helpers.js';
+  import { fetchSong, formatNullable } from '../helpers.js';
   
   export let slug;
   export let index = '0';
