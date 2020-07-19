@@ -1,9 +1,9 @@
 <template lang="pug">
   footer
     .container
-      p
-        = '©2020 ' 
-        a(href='http://danielnarey.com')= 'Daniel C. Narey'
+      section
+        p= '©2020 ' 
+          a(href='http://danielnarey.com')= 'Daniel C. Narey'
 
 </template>
 
@@ -18,6 +18,8 @@
   section
     @apply text-center
 
+  a
+    @apply text-bright-blue-green
 
   @screen c17
     footer

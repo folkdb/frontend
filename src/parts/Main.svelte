@@ -36,6 +36,8 @@
           this='{currentRoute.component}'
           '{...currentRoute.params}'
         )
+  
+      button.unstyled(on:click='{scrollPageTop()}')= '▲ Top'
     
 </template>
 
@@ -47,7 +49,9 @@
   
   #pageContent
     @apply px-1b
-
+  
+  button
+    @apply font-bold text-medium-blue-green
       
   @screen c17
     main
