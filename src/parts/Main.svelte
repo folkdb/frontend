@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import navaid from 'navaid';
   import routes from '../routes/index.js';
-  
+  import { scrollPageTop } from '../routes/helpers.js';
   
   let currentRoute = { params: {}, ...routes[0] };
   let Navaid;
