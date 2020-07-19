@@ -34,8 +34,9 @@
     nav
       @apply w-5c
   
-  @media print
+  @media print {
     nav
       @apply hidden
+  }
     
 </style>
