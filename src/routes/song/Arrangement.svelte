@@ -1,5 +1,5 @@
 <script>
-  import { formatNullable } from '../helpers.js';
+  import { formatNullable } from '../../helpers.js';
   
   export let entry;
   export let slug;

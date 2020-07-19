@@ -1,8 +1,38 @@
+<script>
+  import { onMount } from 'svelte';
+  import { fetchSong } from '../helpers.js';
+  
+  let songs = [];
+  let error;
+
+  onMount(async () => {
+    let data = {};
+
+    ({ data, error } = await fetchSong('index'));
+    
+    songs = Object.keys(data).map((slug) => ({
+      url: `/song/${slug}`,
+      title: data[slug],
+    });
+  });
+
+</script>
+
+
 <template lang="pug">
   nav
     p
       | You’re viewing an open-access preview of FolkDB.
       | See below for a sample of songs from our database.
+    
+    p= 'Songs'
+    
+    ul
+      +each('songs as entry')
+        li: a(href='{entry.url}')= '{entry.title}'
+    
+    +if('error')
+      p: code.error= '{error}'
   
 </template>
 
