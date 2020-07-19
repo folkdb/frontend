@@ -38,7 +38,7 @@
           '{...currentRoute.params}'
         )
       
-      p
+      p.nav
         button.unstyled(on:click='{scrollToTop}')
           span= '▲ Top'
     
@@ -53,7 +53,7 @@
   #pageContent
     @apply px-1b
   
-  p
+  p.nav
     @apply w-full
     @apply text-center
   
@@ -63,5 +63,9 @@
   @screen c17
     main
       @apply py-3b
+
+  @media print
+    p.nav
+      display: none
 
 </style>
