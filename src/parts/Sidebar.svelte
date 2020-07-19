@@ -35,7 +35,7 @@
       @apply w-5c
   
   @media print
-    header
+    nav
       @apply hidden
     
 </style>
