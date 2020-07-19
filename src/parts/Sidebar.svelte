@@ -9,11 +9,11 @@
     let data = {};
 
     ({ data, error } = await fetchSong('index'));
-    
+  
     songs = Object.keys(data).map((slug) => ({
       url: `/song/${slug}`,
       title: data[slug],
-    });
+    }));
   });
 
 </script>
