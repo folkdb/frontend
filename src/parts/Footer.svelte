@@ -25,9 +25,8 @@
     footer
       @apply pt-3b
   
-  @media print {
+  @media print
     footer
-      @apply hidden
-  }
+      display: none
 
 </style>

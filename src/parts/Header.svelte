@@ -36,10 +36,9 @@
     @apply w-screen
     @apply h-4b
   
-  @media print {
+  @media print
     header
-      @apply hidden
-  }
+      display: none
 
 </style>
     

@@ -3,6 +3,8 @@
   import navaid from 'navaid';
   import routes from '../routes/index.js';
   
+  const scrollToTop = () => { window.scrollTo({ top: 0 }); };
+
   let currentRoute = { params: {}, ...routes[0] };
   let Navaid;
 
@@ -37,7 +39,7 @@
         )
       
       p
-        button.unstyled(on:click='{() => window.scrollTo({ top: 0 })}')
+        button.unstyled(on:click='{scrollToTop}')
           span= '▲ Top'
     
 </template>
