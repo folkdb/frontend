@@ -11,9 +11,13 @@
   onMount(() => {
     Navaid = navaid('/');
     
-    routes.forEach((route) => {
-      Navaid.on(route.path, (params) => { 
-        currentRoute = { params, ...route };
+    routes.forEach((entry) => {
+      Navaid.on(entry.path, (params) => {
+        if (entry.redirect) {
+          Navaid.route(entry.redirect(params), true);
+        } else {
+          currentRoute = { params, ...entry };
+        }
       })
     });
     

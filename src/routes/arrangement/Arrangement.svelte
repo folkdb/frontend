@@ -10,8 +10,6 @@
   export let offset = [0, 0];
   export let options = {};
   
-  index = index || '0';
-  
   let data;
   let arrangement;
   let loadError;
