@@ -24,5 +24,8 @@
   @screen c17
     footer
       @apply pt-3b
+  
+  @media print
+    display: none
 
 </style>

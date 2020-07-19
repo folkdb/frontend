@@ -35,6 +35,9 @@
   #shadowHeader
     @apply w-screen
     @apply h-4b
+  
+  @media print
+    display: none
 
 </style>
     

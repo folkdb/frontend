@@ -33,5 +33,8 @@
   @screen c21
     nav
       @apply w-5c
+  
+  @media print
+    display: none
     
 </style>

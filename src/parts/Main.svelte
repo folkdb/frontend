@@ -35,8 +35,10 @@
           this='{currentRoute.component}'
           '{...currentRoute.params}'
         )
-  
-      button.unstyled(on:click='{window.scrollTo({ top: 0 })}')= '▲ Top'
+      
+      p
+        button.unstyled(on:click='{() => window.scrollTo({ top: 0 })}')
+          span= '▲ Top'
     
 </template>
 
@@ -49,8 +51,11 @@
   #pageContent
     @apply px-1b
   
-  button
+  p
+    @apply w-full
     @apply text-center
+  
+  button
     @apply font-bold text-medium-blue-green
       
   @screen c17
