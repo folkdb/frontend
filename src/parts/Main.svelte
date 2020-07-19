@@ -1,9 +1,11 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import navaid from 'navaid';
-  import routes from '../routes/index.js';
+  import routes from '../routes.js';
   
-  const scrollToTop = () => { window.scrollTo({ top: 0 }); };
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0 });
+  };
 
   let currentRoute = { params: {}, ...routes[0] };
   let Navaid;
