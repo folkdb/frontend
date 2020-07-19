@@ -58,7 +58,7 @@
     @apply text-center
   
   button
-    @apply font-bold text-medium-blue-green
+    @apply text-base font-bold text-medium-orange
       
   @screen c17
     main

@@ -105,7 +105,8 @@
   +if('parseError')
     p: code.error= 'ERROR: {parseError}'
     
-  #target
+  section
+    #target
 
 </template>
 

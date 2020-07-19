@@ -19,7 +19,7 @@
     @apply text-center
 
   a
-    @apply text-bright-blue-green
+    @apply text-soft-green
 
   @screen c17
     footer
