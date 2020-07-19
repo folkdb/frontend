@@ -3,7 +3,7 @@
     .container
       section
         p= '©2020 ' 
-          a(href='http://danielnarey.com')= 'Daniel C. Narey'
+          a.unstyled(href='http://danielnarey.com')= 'Daniel C. Narey'
 
 </template>
 
@@ -20,6 +20,9 @@
 
   a
     @apply text-soft-green
+  
+  a:visited
+    @apply text-soft-red-purple
 
   @screen c17
     footer
