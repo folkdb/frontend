@@ -37,7 +37,7 @@
           '{...currentRoute.params}'
         )
   
-      button.unstyled(on:click='{scrollPageTop()}')= '▲ Top'
+      button.unstyled(on:click='{window.scrollTo({ top: 0 })}')= '▲ Top'
     
 </template>
 
@@ -51,6 +51,7 @@
     @apply px-1b
   
   button
+    @apply text-center
     @apply font-bold text-medium-blue-green
       
   @screen c17

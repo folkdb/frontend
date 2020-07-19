@@ -1,9 +1,6 @@
 import { get } from 'svelte/store';
 import { loadedSongs } from '../store.js';
 
-export const scrollPageTop = () => {
-  document.getElementById('shadowHeader').scrollIntoView();
-};
 
 export const fetchSong = async (slug) => {
   const data = get(loadedSongs).get(slug);

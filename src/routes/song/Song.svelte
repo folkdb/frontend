@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { scrollPageTop, fetchSong } from '../helpers.js';
+  import { fetchSong } from '../helpers.js';
   import Transcription from './Transcription.svelte';
   import Recording from './Recording.svelte';
   import Arrangement from './Arrangement.svelte';
@@ -11,7 +11,7 @@
   let error;
 
   onMount(async () => {
-    scrollPageTop();
+    window.scrollTo({ top: 0 });
 
     ({ data, error } = await fetchSong(slug));
   });
