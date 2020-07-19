@@ -5,7 +5,7 @@
     
     .logo= 'folkDB'
 
-  .shadow-header
+  #shadowHeader
 
 </template>
 
@@ -32,7 +32,7 @@
     @apply text-white
     @apply font-bold text-3xl leading-none
 
-  .shadow-header
+  #shadowHeader
     @apply w-screen
     @apply h-4b
 

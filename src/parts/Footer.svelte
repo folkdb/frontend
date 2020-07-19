@@ -1,8 +1,9 @@
 <template lang="pug">
   footer
     .container
-      :md(tag='section')
-        ©2020 [Daniel C. Narey](http://danielnarey.com)
+      p
+        = '©2020 ' 
+        a(href='http://danielnarey.com')= 'Daniel C. Narey'
 
 </template>
 
@@ -11,8 +12,8 @@
   footer
     @apply w-screen min-h-7c
     @apply pt-2b
-    @apply bg-light-blue
-    @apply text-dark text-sm
+    @apply bg-dark-blue-green
+    @apply text-light
   
   section
     @apply text-center

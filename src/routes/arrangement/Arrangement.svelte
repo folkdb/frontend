@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
   import { vextabReady } from '../../store.js';
-  import { fetchSong, formatNullable } from '../helpers.js';
+  import { scrollPageTop, fetchSong, formatNullable } from '../helpers.js';
   
   export let slug;
   export let index;
@@ -52,6 +52,8 @@
   };
   
   onMount(async () => {
+    scrollPageTop();
+
     let error;
 
     ({ data, error } = await fetchSong(slug));
@@ -92,12 +94,10 @@
 
 <template lang="pug">
   +if('data')
-    .typeset
-      .heading
-        h1= '{data.canonicalName}'
+    h1= '{data.canonicalName}'
         
-      +if('arrangement')
-        section= '{@html formatEntry(arrangement)}'
+    +if('arrangement')
+      section= '{@html formatEntry(arrangement)}'
 
   +if('loadError')
     p: code.error= 'ERROR: {loadError}'
@@ -111,17 +111,7 @@
 
 
 <style lang="postcss">
-  .heading
-    @apply pb-2b
-
-  .heading h1
-    @apply m-0
- 
   .error
     @apply text-medium-red
-
-  @screen c17
-    .heading
-      @apply pb-3b
 
 </style>

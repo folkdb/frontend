@@ -1,5 +1,4 @@
 import sveltePreprocess from 'svelte-preprocess';
-import pugFilterMarkdown from '@metamodern/pug-filter-markdown';
 import sugarss from 'sugarss';
 import postcssEasyImport from 'postcss-easy-import';
 import tailwindcss from 'tailwindcss';
@@ -17,9 +16,6 @@ const config = ({
 } = {}) => ({
   browsers,
   sveltePreprocess: sveltePreprocess({
-    pug: {
-      filters: { md: pugFilterMarkdown },
-    },
     postcss: {
       parser: sugarss,
       plugins: [].concat(
