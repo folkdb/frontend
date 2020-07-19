@@ -15,4 +15,10 @@
       @apply max-w-20c
       padding-left: 22rem
   
+  @media print
+    .container
+      @apply max-w-full
+      @apply m-0
+      @apply p-0
+      
 </style>
