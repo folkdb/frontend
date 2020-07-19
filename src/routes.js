@@ -18,7 +18,7 @@ const routes = [
   },
   {
     path: '/song/:slug/arrangement',
-    redirect: ({ slug }) => `/song/:${slug}/arrangement/0`,
+    redirect: ({ slug }) => `/song/${slug}/arrangement/0`,
   },
 ];
 
