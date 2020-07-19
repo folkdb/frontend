@@ -26,6 +26,7 @@
       @apply pt-3b
   
   @media print
-    display: none
+    header
+      @apply hidden
 
 </style>

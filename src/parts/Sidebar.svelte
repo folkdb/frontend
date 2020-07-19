@@ -35,6 +35,7 @@
       @apply w-5c
   
   @media print
-    display: none
+    header
+      @apply hidden
     
 </style>

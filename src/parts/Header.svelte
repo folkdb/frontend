@@ -37,7 +37,8 @@
     @apply h-4b
   
   @media print
-    display: none
+    header
+      @apply hidden
 
 </style>
     
