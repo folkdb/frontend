@@ -24,7 +24,6 @@
     "@iarna/toml": "^2.2.5",
     "@metamodern/copy-typefaces": "^2.0.3",
     "@metamodern/design-system": "^2.0.0",
-    "@metamodern/pug-filter-markdown": "^1.0.0",
     "cssnano": "^4.1.10",
     "httpie": "^1.1.2",
     "navaid": "^1.1.1",
