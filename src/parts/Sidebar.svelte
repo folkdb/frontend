@@ -21,15 +21,18 @@
 
 <template lang="pug">
   nav
-    p
-      | You’re viewing an open-access preview of FolkDB.
-      | See below for a sample of songs from our database.
+    section.notification
+      p
+        | You’re viewing an open-access preview of FolkDB.
+        | See below for a sample of songs from our database.
+
+    section.menu
+      .heading
+        p= 'SONGS'
     
-    p= 'Songs'
-    
-    ul
-      +each('songs as entry')
-        li: a(href='{entry.url}')= '{entry.title}'
+      ul
+        +each('songs as entry')
+          li: a.unstyled(href='{entry.url}')= '{entry.title}'
     
     +if('error')
       p: code.error= '{error}'
@@ -42,13 +45,32 @@
     @apply w-full
     @apply px-one-and-half-b
     @apply border-darker-orange
-    @apply text-light-orange
     background-color: hsl(45,15%,17%)
 
-  p
+  section.notification p
     @apply text-bright-orange
     @apply font-medium italic text-sm-narrow
-  
+
+  .heading
+    @apply pb-1b
+
+  .heading p
+    @apply pl-1b
+    @apply rounded
+    @apply bg-medium-dark-blue-green
+    @apply text-white
+    @apply font-bold text-sm-wide
+
+  ul
+    @apply pl-half-b
+
+  li
+    @apply pb-half-b
+    @apply font-medium text-sm-narrow
+
+  li a
+    @apply text-light-blue-green
+
   @screen c11
     nav
       @apply fixed overflow-y-scroll
