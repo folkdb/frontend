@@ -3,7 +3,6 @@
   import { get } from 'svelte/store';
   import { vextabReady } from '../../store.js';
   import { fetchSong } from '../../helpers.js';
-  import renderSvg from './render-svg.js';
   import Details from './Details.svelte';
   
   export let slug;
@@ -47,6 +46,33 @@
   beforeUpdate(() => {
     window.scrollTo({ top: 0 });
   });
+  
+  const renderSvg = (content, {
+    offset = [0, 0],
+    width = 832,
+    ...options
+  } = {}) => {
+    if (window.vextab) {
+      const { VexTab, Artist, Vex } = window.vextab;
+      const { Renderer } = Vex.Flow;
+  
+      const renderer = new Renderer('target', Renderer.Backends.SVG);
+      const artist = new Artist(offset[0], offset[1], width, options);
+      const tab = new VexTab(artist);
+      
+      try {
+        tab.parse(content);
+        artist.render(renderer);
+      } catch (err) {
+        parseError = err.message || err;
+      }
+    } else {
+      window.setTimeout(
+        () => renderSvg(content, { offset, width, ...options }),
+        250,
+      );
+    }
+  };
   
   afterUpdate(() => {
     if (content) {
