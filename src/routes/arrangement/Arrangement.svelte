@@ -11,14 +11,17 @@
   
   let data;
   let arrangement;
-  let error;
+  let loadError;
+  let parseError;
   
   $: (async () => {
+    let error;
+
     ({ data, error } = await fetchSong(slug));
     
     const i = parseInt(index, 10);
     arrangement = data ? (data.arrangements || [])[i] : false;
-    content = arrangement ? arrangement.content : false;
+    const content = arrangement ? arrangement.content : false;
     
     if (content) {
       if (get(vextabReady)) {
