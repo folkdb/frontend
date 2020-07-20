@@ -11,6 +11,7 @@
   
   let data;
   let arrangement;
+  let content;
   let error;
   let loadError;
   let parseError;
