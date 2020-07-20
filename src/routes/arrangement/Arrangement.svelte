@@ -18,11 +18,11 @@
     let error;
 
     ({ data, error } = await fetchSong(slug));
-    
+  
     const i = parseInt(index, 10);
     arrangement = data ? (data.arrangements || [])[i] : false;
     const content = arrangement ? arrangement.content : false;
-    
+  
     if (content) {
       if (get(vextabReady)) {
         renderSvg(content);
@@ -32,13 +32,13 @@
         });
       }
     }
-    
+  
     loadError = (
       data && !arrangement
         ? `You may have arrived here via a broken link or bad URL. There is no arrangement for "${slug}" at index ${index}.`
         : error
     );
-    
+  
     parseError = (
       arrangement && !content
         ? 'Oops, something is missing! This arrangement has no notation to parse.'
