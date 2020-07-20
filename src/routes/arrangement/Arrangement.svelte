@@ -8,9 +8,6 @@
   
   export let slug;
   export let index;
-  export let width = 832;
-  export let offset = [0, 0];
-  export let options = {};
   
   let data;
   let arrangement;

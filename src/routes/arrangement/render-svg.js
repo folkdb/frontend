@@ -1,4 +1,8 @@
-const renderSvg = (content) => {
+const renderSvg = (content, {
+  offset = [0, 0],
+  width = 832,
+  ...options
+} = {}) => {
   if (window.vextab) {
     const { VexTab, Artist, Vex } = window.vextab;
     const { Renderer } = Vex.Flow;
@@ -7,14 +11,13 @@ const renderSvg = (content) => {
     const artist = new Artist(offset[0], offset[1], width, options);
     const tab = new VexTab(artist);
 
-    try {
-      tab.parse(content);
-      artist.render(renderer);
-    } catch (err) {
-      parseError = err.message || err;
-    }
+    tab.parse(content);
+    artist.render(renderer);
   } else {
-    window.setTimeout(renderSvg, 250);
+    window.setTimeout(
+      () => renderSvg(content, { offset, width, ...options }),
+      250,
+    );
   }
 };
 
