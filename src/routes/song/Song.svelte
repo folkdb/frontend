@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { beforeUpdate } from 'svelte';
   import { fetchSong } from '../../helpers.js';
   import Transcription from './Transcription.svelte';
   import Recording from './Recording.svelte';
@@ -10,10 +10,12 @@
   let data;
   let error;
 
-  onMount(async () => {
-    window.scrollTo({ top: 0 });
-
+  $: (async () => {
     ({ data, error } = await fetchSong(slug));
+  })();
+
+  beforeUpdate(() => {
+    window.scrollTo({ top: 0 });
   });
 
 </script>
