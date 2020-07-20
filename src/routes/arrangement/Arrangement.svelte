@@ -11,40 +11,41 @@
   
   let data;
   let arrangement;
+  let error;
   let loadError;
   let parseError;
   
-  $: (async () => {
-    let error;
-
+  $: arrangement = (async () => {
     ({ data, error } = await fetchSong(slug));
   
-    const i = parseInt(index, 10);
-    arrangement = data ? (data.arrangements || [])[i] : false;
-    const content = arrangement ? arrangement.content : false;
-  
-    if (content) {
-      if (get(vextabReady)) {
-        renderSvg(content);
-      } else {
-        vextabReady.subscribe((isReady) => {
-          if (isReady) { renderSvg(content); }
-        });
-      }
-    }
-  
-    loadError = (
-      data && !arrangement
-        ? `You may have arrived here via a broken link or bad URL. There is no arrangement for "${slug}" at index ${index}.`
-        : error
-    );
-  
-    parseError = (
-      arrangement && !content
-        ? 'Oops, something is missing! This arrangement has no notation to parse.'
+    return (
+      data 
+        ? (data.arrangements || [])[parseInt(index, 10)] 
         : false
     );
-  })();
+  });
+  
+  $: if (arrangement.content) {
+    if (get(vextabReady)) {
+      renderSvg(arrangement.content);
+    } else {
+      vextabReady.subscribe((isReady) => {
+        if (isReady) { renderSvg(arrangement.content); }
+      });
+    }
+  }
+  
+  $: loadError = (
+    data && !arrangement
+      ? `You may have arrived here via a broken link or bad URL. There is no arrangement for "${slug}" at index ${index}.`
+      : error
+  );
+  
+  $: parseError = (
+    arrangement && !content
+      ? 'Oops, something is missing! This arrangement has no notation to parse.'
+      : false
+  );
   
   beforeUpdate(() => {
     window.scrollTo({ top: 0 });
