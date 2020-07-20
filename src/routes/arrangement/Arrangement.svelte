@@ -1,5 +1,5 @@
 <script>
-  import { beforeUpdate } from 'svelte';
+  import { beforeUpdate, afterUpdate } from 'svelte';
   import { get } from 'svelte/store';
   import { vextabReady } from '../../store.js';
   import { fetchSong } from '../../helpers.js';
@@ -58,7 +58,7 @@
         });
       }
     }
-  })
+  });
   
 </script>
 
