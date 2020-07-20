@@ -59,7 +59,7 @@
       const renderer = new Renderer('target', Renderer.Backends.SVG);
       const artist = new Artist(offset[0], offset[1], width, options);
       const tab = new VexTab(artist);
-      
+  
       try {
         tab.parse(str);
         artist.render(renderer);
