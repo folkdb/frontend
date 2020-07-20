@@ -16,9 +16,9 @@
   
   $: (async () => {
     let error;
-    
+  
     ({ data, error } = await fetchSong(slug));
-    
+  
     arrangement = (
       data
         ? (data.arrangements || [])[parseInt(index, 10)]
@@ -28,7 +28,7 @@
     const content = arrangement ? arrangement.content : false;
   
     if (content) {
-      if ($vextabReady) {
+      if (get(vextabReady)) {
         renderSvg(content);
       } else {
         vextabReady.subscribe((isReady) => {
