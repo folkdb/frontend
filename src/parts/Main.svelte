@@ -17,7 +17,7 @@
     routes.forEach(({ path, redirect, component, ...routeParams }) => {
       Navaid.on(path, (pathParams) => {
         if (redirect) {
-          Navaid.route(redirect(params), true);
+          Navaid.route(redirect(pathParams), true);
         } else {
           Component = component;
           Props = { ...pathParams, ...routeParams };
