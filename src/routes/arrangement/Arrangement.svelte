@@ -47,7 +47,7 @@
     window.scrollTo({ top: 0 });
   });
   
-  const renderSvg = (content, {
+  const renderSvg = (str, {
     offset = [0, 0],
     width = 832,
     ...options
@@ -61,14 +61,14 @@
       const tab = new VexTab(artist);
       
       try {
-        tab.parse(content);
+        tab.parse(str);
         artist.render(renderer);
       } catch (err) {
         parseError = err.message || err;
       }
     } else {
       window.setTimeout(
-        () => renderSvg(content, { offset, width, ...options }),
+        () => renderSvg(str, { offset, width, ...options }),
         250,
       );
     }
