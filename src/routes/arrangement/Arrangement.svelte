@@ -42,7 +42,7 @@
   );
   
   $: parseError = (
-    arrangement && !content
+    arrangement && !arrangement.content
       ? 'Oops, something is missing! This arrangement has no notation to parse.'
       : false
   );
