@@ -10,41 +10,38 @@
   export let index;
   
   let data;
+  let arrangement;
   let error;
   
   $: (async () => {
     ({ data, error } = await fetchSong(slug));
-  })();
-  
-  $: arrangement = (
-    data
-      ? (data.arrangements || [])[parseInt(index, 10)]
-      : false
-  );
-  
-  $: content = arrangement ? arrangement.content : false;
-  
-  $: if (content) {
-    if (get(vextabReady)) {
-      renderSvg(content);
-    } else {
-      vextabReady.subscribe((isReady) => {
-        if (isReady) { renderSvg(content); }
-      });
+    
+    const i = parseInt(index, 10);
+    arrangement = data ? (data.arrangements || [])[i] : false;
+    content = arrangement ? arrangement.content : false;
+    
+    if (content) {
+      if (get(vextabReady)) {
+        renderSvg(content);
+      } else {
+        vextabReady.subscribe((isReady) => {
+          if (isReady) { renderSvg(content); }
+        });
+      }
     }
-  }
-  
-  $: loadError = (
-    data && !arrangement
-      ? `You may have arrived here via a broken link or bad URL. There is no arrangement for "${slug}" at index ${index}.`
-      : error
-  );
-  
-  $: parseError = (
-    arrangement && !content
-      ? 'Oops, something is missing! This arrangement has no notation to parse.'
-      : false
-  );
+    
+    loadError = (
+      data && !arrangement
+        ? `You may have arrived here via a broken link or bad URL. There is no arrangement for "${slug}" at index ${index}.`
+        : error
+    );
+    
+    parseError = (
+      arrangement && !content
+        ? 'Oops, something is missing! This arrangement has no notation to parse.'
+        : false
+    );
+  })();
   
   beforeUpdate(() => {
     window.scrollTo({ top: 0 });
