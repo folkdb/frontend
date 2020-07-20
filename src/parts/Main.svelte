@@ -7,18 +7,20 @@
     window.scrollTo({ top: 0 });
   };
 
-  let currentRoute = { params: {}, ...routes[0] };
+  let Component;
+  let Props;
   let Navaid;
 
   onMount(() => {
     Navaid = navaid('/');
     
-    routes.forEach((entry) => {
-      Navaid.on(entry.path, (params) => {
-        if (entry.redirect) {
-          Navaid.route(entry.redirect(params), true);
+    routes.forEach(({ path, redirect, component, ...routeParams }) => {
+      Navaid.on(path, (pathParams) => {
+        if (redirect) {
+          Navaid.route(redirect(params), true);
         } else {
-          currentRoute = { params, ...entry };
+          Component = component;
+          Props = { ...pathParams, ...routeParams };
         }
       })
     });
@@ -39,10 +41,8 @@
   main
     .container
       #pageContent
-        svelte:component(
-          this='{currentRoute.component}'
-          '{...currentRoute.params}'
-        )
+        +if('Component')
+          svelte:component(this='{Component}' '{...Props}')
       
       p.nav
         button.unstyled(on:click='{scrollToTop}')
