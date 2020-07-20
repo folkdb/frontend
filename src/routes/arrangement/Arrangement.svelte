@@ -23,14 +23,20 @@
         ? (data.arrangements || [])[parseInt(index, 10)]
         : false
     );
+    
+    content = (
+      arrangement
+        ? arrangement.content
+        : false
+    );
   })();
   
-  $: if (arrangement.content) {
+  $: if (content) {
     if (get(vextabReady)) {
-      renderSvg(arrangement.content);
+      renderSvg(content);
     } else {
       vextabReady.subscribe((isReady) => {
-        if (isReady) { renderSvg(arrangement.content); }
+        if (isReady) { renderSvg(content); }
       });
     }
   }
@@ -42,7 +48,7 @@
   );
   
   $: parseError = (
-    arrangement && !arrangement.content
+    arrangement && !content
       ? 'Oops, something is missing! This arrangement has no notation to parse.'
       : false
   );
