@@ -1,8 +1,10 @@
 <script>
-  import { onMount } from 'svelte';
+  import { beforeUpdate } from 'svelte';
   import { get } from 'svelte/store';
   import { vextabReady } from '../../store.js';
-  import { fetchSong, formatNullable } from '../../helpers.js';
+  import { fetchSong } from '../../helpers.js';
+  import renderSvg from './render-svg.js';
+  import Details from './Details.svelte';
   
   export let slug;
   export let index;
@@ -15,47 +17,11 @@
   let loadError;
   let parseError;
   
-  const formatEntry = (entry) => [
-    '<ul>',
-    formatNullable(
-      '<li><strong>Instruments:</strong> ',
-      entry.instruments,
-      '</li>',
-    ),
-    entry.tonic || entry.mode ? '<li>' : '',
-    formatNullable('<strong>Key:</strong> ', entry.tonic, ' '),
-    formatNullable('', entry.mode),
-    entry.tonic || entry.mode ? '</li>' : '',
-    '</ul>',
-  ].join('');
-  
-  const renderSvg = (content) => {
-    if (window.vextab) {
-      const { VexTab, Artist, Vex } = window.vextab;
-      const { Renderer } = Vex.Flow;
-  
-      const renderer = new Renderer('target', Renderer.Backends.SVG);
-      const artist = new Artist(offset[0], offset[1], width, options);
-      const tab = new VexTab(artist);
-  
-      try {
-        tab.parse(content);
-        artist.render(renderer);
-      } catch (err) {
-        parseError = err.message || err;
-      }
-    } else {
-      window.setTimeout(renderSvg, 250);
-    }
-  };
-  
-  onMount(async () => {
-    window.scrollTo({ top: 0 });
-
+  $: (async () => {
     let error;
-
+    
     ({ data, error } = await fetchSong(slug));
-  
+    
     arrangement = (
       data
         ? (data.arrangements || [])[parseInt(index, 10)]
@@ -65,7 +31,7 @@
     const content = arrangement ? arrangement.content : false;
   
     if (content) {
-      if (get(vextabReady)) {
+      if ($vextabReady) {
         renderSvg(content);
       } else {
         vextabReady.subscribe((isReady) => {
@@ -85,6 +51,10 @@
         ? 'Oops, something is missing! This arrangement has no notation to parse.'
         : false
     );
+  })();
+  
+  beforeUpdate(async () => {
+    window.scrollTo({ top: 0 });
   });
   
 </script>
@@ -93,9 +63,10 @@
 <template lang="pug">
   +if('data')
     h1= '{data.canonicalName}'
-        
-    +if('arrangement')
-      section= '{@html formatEntry(arrangement)}'
+    
+    section
+      +if('arrangement')
+        Details('{arrangement}')
 
   +if('loadError')
     p: code.error= 'ERROR: {loadError}'
