@@ -18,29 +18,19 @@
   
   $: (async () => {
     ({ data, error } = await fetchSong(slug));
-  
-    arrangement = (
-      data
-        ? (data.arrangements || [])[parseInt(index, 10)]
-        : false
-    );
-    
-    content = (
-      arrangement
-        ? arrangement.content
-        : false
-    );
   })();
   
-  $: if (content) {
-    if (get(vextabReady)) {
-      renderSvg(content);
-    } else {
-      vextabReady.subscribe((isReady) => {
-        if (isReady) { renderSvg(content); }
-      });
-    }
-  }
+  $: arrangement = (
+    data
+      ? (data.arrangements || [])[parseInt(index, 10)]
+      : false
+  );
+  
+  $: content = (
+    arrangement
+      ? arrangement.content
+      : false
+  );
   
   $: loadError = (
     data && !arrangement
@@ -57,6 +47,18 @@
   beforeUpdate(() => {
     window.scrollTo({ top: 0 });
   });
+  
+  afterUpdate(() => {
+    if (content) {
+      if (get(vextabReady)) {
+        renderSvg(content);
+      } else {
+        vextabReady.subscribe((isReady) => {
+          if (isReady) { renderSvg(content); }
+        });
+      }
+    }
+  })
   
 </script>
 
