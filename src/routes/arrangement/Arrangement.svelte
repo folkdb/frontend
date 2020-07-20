@@ -15,15 +15,15 @@
   let loadError;
   let parseError;
   
-  $: arrangement = (async () => {
+  $: (async () => {
     ({ data, error } = await fetchSong(slug));
   
-    return (
-      data 
-        ? (data.arrangements || [])[parseInt(index, 10)] 
+    arrangement = (
+      data
+        ? (data.arrangements || [])[parseInt(index, 10)]
         : false
     );
-  });
+  })();
   
   $: if (arrangement.content) {
     if (get(vextabReady)) {
