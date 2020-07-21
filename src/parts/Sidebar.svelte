@@ -5,7 +5,6 @@
   export let slug = '';
   
   let songs = [];
-  let data;
   let error;
   
   onMount(async () => {
@@ -14,6 +13,7 @@
     ({ data, error } = await fetchSong('index'));
   
     songs = Object.keys(data).map((k) => ({
+      slug: k,
       url: `/song/${k}`,
       title: data[k],
     }));
@@ -79,7 +79,7 @@
     @apply text-medium-light-blue-green
   
   li a.active
-    @apply text-bright-blue-green
+    @apply text-medium-light-green
     @apply underline
 
   @screen c11

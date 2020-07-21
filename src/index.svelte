@@ -48,7 +48,7 @@
     Header
 
     Main
-      +if('Component')
+      +if('PageContent')
         svelte:component(this='{PageContent}' '{...Props}')
     
     Footer
