@@ -35,7 +35,7 @@
   });
 
   onDestroy(() => {
-    Navaid.unlisten();
+    if (Navaid.unlisten) { Navaid.unlisten(); }
   });
 
 </script>
