@@ -1,39 +1,8 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import navaid from 'navaid';
-  import routes from '../routes.js';
-  
   const scrollToTop = () => {
     window.scrollTo({ top: 0 });
   };
 
-  let Component;
-  let Props;
-  let Navaid;
-
-  onMount(() => {
-    Navaid = navaid('/');
-    
-    routes.forEach(({ path, redirect, component, ...routeParams }) => {
-      Navaid.on(path, (pathParams) => {
-        if (redirect) {
-          Navaid.route(redirect(pathParams), true);
-        } else {
-          Component = component;
-          Props = { ...pathParams, ...routeParams };
-        }
-      })
-    });
-    
-    Navaid.listen();
-  });
-
-  onDestroy(() => {
-    if (Navaid) {
-      Navaid.unlisten();
-    }
-  });
-  
 </script>
 
 
@@ -41,8 +10,7 @@
   main
     .container
       #pageContent
-        +if('Component')
-          svelte:component(this='{Component}' '{...Props}')
+        slot
       
       p.nav
         button.unstyled(on:click='{scrollToTop}')

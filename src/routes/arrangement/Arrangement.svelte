@@ -1,5 +1,5 @@
 <script>
-  import { beforeUpdate, afterUpdate } from 'svelte';
+  import { afterUpdate } from 'svelte';
   import { get } from 'svelte/store';
   import { vextabReady } from '../../store.js';
   import { fetchSong } from '../../helpers.js';
@@ -42,10 +42,6 @@
       ? 'Oops, something is missing! This arrangement has no notation to parse.'
       : false
   );
-  
-  beforeUpdate(() => {
-    window.scrollTo({ top: 0 });
-  });
   
   const renderSvg = (str, {
     offset = [0, 0],

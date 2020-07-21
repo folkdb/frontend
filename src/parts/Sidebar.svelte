@@ -2,17 +2,20 @@
   import { onMount } from 'svelte';
   import { fetchSong } from '../helpers.js';
   
+  export let slug = '';
+  
   let songs = [];
+  let data;
   let error;
-
+  
   onMount(async () => {
     let data = {};
 
     ({ data, error } = await fetchSong('index'));
   
-    songs = Object.keys(data).map((slug) => ({
-      url: `/song/${slug}`,
-      title: data[slug],
+    songs = Object.keys(data).map((k) => ({
+      url: `/song/${k}`,
+      title: data[k],
     }));
   });
 
@@ -32,7 +35,11 @@
     
       ul
         +each('songs as entry')
-          li: a.unstyled(href='{entry.url}')= '{entry.title}'
+          li
+            a.unstyled(
+              href='{entry.url}'
+              class:active='{entry.slug === slug}'
+            )= '{entry.title}'
     
     +if('error')
       p: code.error= '{error}'
@@ -57,9 +64,9 @@
   .heading p
     @apply pl-1b
     @apply rounded
-    @apply bg-medium-dark-blue-green
+    @apply bg-medium-blue-green
     @apply text-white
-    @apply font-bold text-sm-wide
+    @apply font-bold text-sm-wide tracking-wide
 
   ul
     @apply pl-half-b
@@ -69,7 +76,11 @@
     @apply font-medium text-sm-narrow
 
   li a
-    @apply text-light-blue-green
+    @apply text-medium-light-blue-green
+  
+  li a.active
+    @apply text-bright-blue-green
+    @apply underline
 
   @screen c11
     nav

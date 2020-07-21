@@ -1,5 +1,7 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, afterUpdate, onDestroy } from 'svelte';
+  import navaid from 'navaid';
+  import routes from './routes.js';
   import { vextabReady } from './store.js';
   import Header from './parts/Header.svelte';
   import Sidebar from './parts/Sidebar.svelte';
@@ -7,21 +9,47 @@
   import Footer from './parts/Footer.svelte';
   import './styles/index.js';
 
+  let PageContent;
+  let Props = {};
+  let Navaid = navaid('/');
   let contentLoaded = false;
   
+  routes.forEach(({ path, redirect, component, ...routeParams }) => {
+    Navaid.on(path, (pathParams) => {
+      if (redirect) {
+        Navaid.route(redirect(pathParams), true);
+      } else {
+        PageContent = component;
+        Props = { path, ...pathParams, ...routeParams };
+      }
+    })
+  });
+
   onMount(() => {
+    Navaid.listen();
+  });
+  
+  afterUpdate(() => {
+    window.scrollTo({ top: 0 });
     contentLoaded = true;
   });
+
+  onDestroy(() => {
+    Navaid.unlisten();
+  });
+
 </script>
 
 
 <template lang="pug">
   #app
-    Sidebar
+    Sidebar('{...Props}')
     
     Header
 
     Main
+      +if('Component')
+        svelte:component(this='{PageContent}' '{...Props}')
     
     Footer
   
